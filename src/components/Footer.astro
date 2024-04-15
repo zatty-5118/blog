@@ -1,4 +1,5 @@
 ---
+import { BASE_URL } from '../scripts/modules/baseURL.js';
 import '../styles/global/footer.scss';
 ---
 
@@ -16,13 +17,13 @@ import '../styles/global/footer.scss';
                 <div class="link">
                     <ul>
                         <li>
-                            <a href="/">トップ</a>
+                            <a href=`${BASE_URL}/`>トップ</a>
                         </li>
                         <li>
-                            <a href="/article/list/page=1">全ての記事</a>
+                            <a href=`${BASE_URL}/article/list/page=1`>全ての記事</a>
                         </li>
                         <li>
-                            <a href="/profile">プロフィール</a>
+                            <a href=`${BASE_URL}/profile`>プロフィール</a>
                         </li>
                     </ul>
                 </div>
