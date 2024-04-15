@@ -1,0 +1,109 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { BASE_URL } from '../../../scripts/modules/baseURL';
+import { responseBlog,notionBlog,array__allArticleData } from '../../../scripts/api/notionBlog.js';
+import { array__allCategory } from '../../../scripts/array__allCategory.js';
+import { NotionToMarkdown } from "notion-to-md";
+import rehypeStringify from 'rehype-stringify';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import { unified } from 'unified';
+import remarkUnwrapImages from 'remark-unwrap-images';
+import rehypeFigure from "@microflash/rehype-figure";
+import '../../../styles/articlePage.scss';
+
+export async function getStaticPaths() {
+    array__allArticleData.filter((article) => {
+        return array__allCategory.filter((value) => {
+            if(article.category.includes(value.category)){
+                return article["categorySlug"] = value.categorySlug;
+            }
+        });
+    });
+
+    return array__allArticleData.map((elem) => ({
+        params: {slug: elem.slug},
+        props: {
+            response: responseBlog,
+            notion: notionBlog,
+            id: elem.id,
+            title: elem.title,
+            thumbnail: elem.thumbnail,
+            date: elem.date,
+            category_ja: elem.category,
+            category_slug: elem.categorySlug,
+            published: elem.published,
+            description: elem.description
+        }
+    }))
+}
+
+const { slug } = Astro.params;
+const { response,notion,id,title,thumbnail,date,category_ja,category_slug,published,description } = Astro.props;
+
+const n2m = new NotionToMarkdown({ notionClient: notion });
+
+const mdblocks = await n2m.pageToMarkdown(id);
+const mdString = n2m.toMarkdownString(mdblocks);
+const processor = unified();
+processor.use(remarkUnwrapImages);
+processor.use(remarkRehype);
+
+processor.use(rehypeStringify);
+processor.use(remarkParse, { fragment: true });
+processor.use(rehypeFigure);
+
+const html = await processor.process(mdString.parent);
+
+const hierarchies = [
+    {
+        position : 2,
+        itemName: `${title}`,
+        itemPath: `${BASE_URL}/article/view/${slug}`
+    },
+
+]
+
+const lists = [
+    { 
+        name: `${title}`,
+        path: `${BASE_URL}/article/view/${slug}`
+    },
+]
+
+---
+
+<Layout 
+    title=`${title} | zatty's Blog`
+    description={description}
+    url=`${BASE_URL}/article/view/${slug}`
+    hierarchies={hierarchies}
+    lists={lists}
+>
+    <main>
+        <article>
+            <section id="mainView">
+                <section class="top">
+                    <div class="image">
+                        <Image src={thumbnail} alt={title} width={360} height={240}>
+                    </div>
+                    <div class="title">
+                        <h1>{title}</h1>
+                    </div>    
+                </section>
+                <section class="info">
+                    <div id={category_slug} class="category">
+                        <a href=`${BASE_URL}/article/category/${category_slug}/page=1`>{category_ja}</a>
+                    </div>
+                    <div class="date">
+                        <time datetime={date} itemprop="datePublished">{`${new Date(date).getFullYear()}.${('0'+(new Date(date).getMonth()+1)).slice(-2)}.${('0'+(new Date(date).getDate())).slice(-2)}`}</time>
+                    </div>
+                </section>
+            </section>
+            <section id="mainContent">
+                {html}
+            </section>        
+        </article>
+    </main>
+</Layout>

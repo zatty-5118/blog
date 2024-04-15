@@ -1,0 +1,112 @@
+.aboutMe{
+    margin-top: 3rem;
+
+    .title{
+        margin-bottom: 2rem;
+    }
+
+    .profile{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        gap: 1rem;
+
+        @include responsive(md){
+            grid-template-columns: repeat(2,1fr);
+            gap: 2rem;
+        }
+
+    
+        div{
+            &:first-child{
+                @include responsive(md){
+                    position: relative;
+                }
+            }
+        }
+
+        &_icon{
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            img{
+                width:150px;
+                height:150px;
+                border-radius:50%;
+            }
+        }
+
+        .summary{
+            p{
+                font-size: 12px;
+        
+                @include responsive(md){
+                    font-size: 14px;
+                }
+            }
+        } 
+            
+        &_item{
+            dl{
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+                border-bottom: 1px dashed cl(cl-gray);
+                padding: 1rem 0;
+        
+                dd{
+                    width: 30%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+        
+                dt{
+                    width: 70%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+    
+                    div{
+                        p{
+                            &:first-child{
+                                font-weight: 700;
+                            }
+    
+                            &:last-child{
+                                font-size: 14px;
+                            }
+                        }                        
+                    }
+
+                    a{
+                        cursor: pointer;
+                    }
+
+                    .link{        
+                        a{
+                            color: cl(cl-black);
+                            text-decoration: underline;
+                            font-size: 14px;
+                            cursor: pointer; 
+                            display: flex;
+                            align-items: center;
+                            gap: 0.25rem;
+                            width: inherit;
+                            height: inherit;
+
+                            &::after{
+                                content: '';
+                                mask: url(https://raw.githubusercontent.com/zatty-5118/portfolio/08f979ddd7f2ed365b459eb65fe9466934152ff7/public/images/icon/link_icon.svg) no-repeat center center / contain;
+                                -webkit-mask: url(https://raw.githubusercontent.com/zatty-5118/portfolio/08f979ddd7f2ed365b459eb65fe9466934152ff7/public/images/icon/link_icon.svg) no-repeat center center / contain;
+                                background: cl(cl-black);
+                                display: inline-block;
+                                width: 15px;
+                                height: 15px;
+                            }
+                        }
+                    }
+                }
+            }    
+        }
+    }    
+}

@@ -1,0 +1,23 @@
+---
+const { lists } = Astro.props;
+import { BASE_URL } from '../../scripts/modules/baseURL.js';
+import '../../styles/global/breadcrumb.scss';
+---
+
+
+<nav id="breadcrumbList">
+    <ol>
+        <li>
+            <a href=`${BASE_URL}/`>ホーム</a>
+        </li>    
+        {lists.map((list, index) => (
+            <li>
+                {lists.length - 1 !==index ? (
+                    <a href={`${list.path}`}>{list.name}</a>
+                ) : (
+                    <span>{list.name}</span>
+                )}
+            </li>
+        ))}
+   </ol>
+</nav>

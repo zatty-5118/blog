@@ -1,0 +1,45 @@
+header{
+    padding: rem(8);
+    background-color: cl(cl-darkYellow);
+    border-bottom: 3px solid #edeabf;
+    // position: sticky;
+    // top: 0;
+    // z-index: 10;
+
+    .wrapper{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin: 0 auto; 
+
+        @include responsive (md) {
+            max-width: 652.8px;
+        }
+    
+        @include responsive (lg) {
+            max-width: 843.2px;
+        }
+    
+        @include responsive (xl) {
+            max-width: 1020px;
+        }
+    
+        @include responsive (xxl) {
+            max-width: 1190px;
+        }    
+
+    }
+
+    .menu{
+        display: flex;
+        align-items: center;
+        gap: rem(16);
+
+        &_item{
+            a{
+                color: cl(cl-white);
+            }
+        }
+    }
+}

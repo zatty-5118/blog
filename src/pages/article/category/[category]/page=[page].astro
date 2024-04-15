@@ -1,0 +1,189 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../../../layouts/Layout.astro';
+import { BASE_URL } from '../../../../scripts/modules/baseURL.js';
+import { array__allArticleData } from '../../../../scripts/api/notionBlog.js';
+import { array__allCategory } from '../../../../scripts/array__allCategory.js';
+import '../../../../styles/articleList.scss';
+
+export async function getStaticPaths({paginate}) {
+  array__allArticleData.filter((article) => {
+    return array__allCategory.filter((value) => {
+      if(article.category.includes(value.category)){
+        return article["categorySlug"] = value.categorySlug
+      }
+    })
+  })
+
+  const array__unipueCategory = [...new Set(array__allArticleData.map((article) => article.categorySlug).flat())];
+
+  return array__unipueCategory.flatMap((category) => {
+    const array__filterArticle = array__allArticleData.filter((article) => article.categorySlug.includes(category));
+    return paginate(array__filterArticle,{
+      params:{ 
+        category
+      },
+      pageSize: 15,
+      props: { 
+        article: array__filterArticle,
+        category_ja: array__filterArticle[0]["category"]
+      },
+    }) 
+  });
+}
+
+const { page,article,category_ja } = Astro.props;
+const { category } = Astro.params;
+const totalPageNumber = Math.ceil(page.total / page.size);
+let currentPageNumber;
+currentPageNumber = page.currentPage;
+let width = 1;
+
+const paginationGenerator = () => {
+  const prev = currentPageNumber - width
+  const next = currentPageNumber + width + 1
+  const ranges = []
+  const rangeWidthDots = []
+  let length;
+  for (let i = 1; i <= totalPageNumber; i += 1) {
+    if (i === 1 || i === totalPageNumber || (i >= prev && i <= next)) {
+      ranges.push(i)
+    } else if (i < prev) {
+      i = prev - 1
+    } else if (i > next) {
+      ranges.push(totalPageNumber)
+      break
+    }
+  }
+  ranges.forEach((range) => {
+    if (length) {
+      if (range - length === 2) {
+        rangeWidthDots.push(length + 1)
+      } else if (range - length !== 1) {
+        rangeWidthDots.push('...')
+      }
+    }
+    rangeWidthDots.push(range)
+    length = range
+  })
+  return rangeWidthDots  
+}
+
+// 構造化データのマークアップ
+const hierarchies = [
+  {
+    position : 2,
+    itemName: `「${category_ja}」の記事一覧`,
+    itemPath: `${BASE_URL}/article/category/${category}/page=1`
+  },
+  {
+    position : 3,
+    itemName: `${page.currentPage}ページ目`,
+    itemPath: `${BASE_URL}/article/list/page=${page.currentPage}`
+  },
+
+]
+
+// パンくずリスト
+const lists = [
+  { 
+    name: `「${category_ja}」の記事一覧`,
+    path: `${BASE_URL}/article/category/${category}/page=1`
+  },
+  {
+    name: `${page.currentPage}ページ目`,
+    path: `${BASE_URL}/article/list/page=${page.currentPage}`
+  }
+]
+
+---
+
+<Layout 
+  title=`「${category_ja}」の記事一覧 | zatty's Blog`
+  description=`「${category_ja}」の記事一覧です。`
+  url=`${BASE_URL}/article/category/${category}/page=1`
+  hierarchies={hierarchies}
+  lists={lists}
+>
+  <main>
+    <section class="articleList">
+      <div class="inner">
+        <div class="title">
+          <h1>「{category_ja}」の記事一覧</h1>
+        </div>
+        <ul>
+          {article.map((value) =>
+            <li>
+              <a href={value.url}>
+                <div class="image">
+                  <Image src={value.thumbnail} alt={value.title} width={800} height={600}/>
+                </div>
+                <div class="text">
+                  <div class="title">
+                    <h2>{value.title}</h2>
+                  </div>
+                  <div class="description">
+                    <p>{value.description}</p>
+                  </div>
+                  <div class="date">
+                    <time datetime={value.date}>{`${new Date(value.date).getFullYear()}.${('0'+(new Date(value.date).getMonth()+1)).slice(-2)}.${('0'+(new Date(value.date).getDate())).slice(-2)}`}</time>
+                  </div>
+                </div>
+              </a>
+            </li>
+          )}
+        </ul>  
+      </div>
+    </section> 
+    {totalPageNumber > 1 && (
+      <section class="pagiNation">
+        <div class="first-button">
+          {page.url.prev ? <a href={`${BASE_URL}/${page.url.prev}`}></a> : <p class="disabled"></p>}
+        </div>
+        <div class="number-list">
+          <ul>
+            {paginationGenerator().map((page) => {
+              if (page === 1 && currentPageNumber === 1) {
+                return (
+                  <li>
+                    <p class="currentPageNumber">{page}</p>
+                  </li>
+                )
+              } else if (page === 1 && currentPageNumber > 1) {
+                return (
+                  <li>
+                    <a href={`${BASE_URL}/article/list/page=${page}`}>
+                      {page}
+                    </a>
+                  </li>
+                )
+              } else if (page === '...') {
+                return (
+                  <li>
+                    <p class="ellipses">{page}</p>
+                  </li>
+                )
+              } else if (page === currentPageNumber) {
+                return (
+                  <li>
+                    <p class="currentPageNumber">{page}</p>
+                  </li>
+                )
+              } 
+              return (
+                <li>
+                  <a href={`${BASE_URL}/article/list/page=${page}`}>
+                    {page}
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+        <div class="last-button">
+          {page.url.next ? <a href={`${BASE_URL}/${page.url.next}`}></a> : <p class="disabled"></p>}
+        </div>
+      </section>
+    )}
+  </main>
+</Layout>

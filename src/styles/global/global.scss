@@ -1,0 +1,92 @@
+body{
+  font-size: rem(14);
+  font-weight: 400;
+  line-height: 1.5;
+  font-family: "Noto Sans JP", sans-serif;
+
+  a {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color: cl(cl-black);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: attr(width) / attr(height);
+    object-fit: cover;
+  }
+
+  // main{
+  //   padding: rem(16) 0 rem(32);
+  // }
+
+  .sp {
+    display: block;
+  }
+  .pc {
+    display: none;
+  }
+  .br-sp {
+    display: inline-block;
+  }
+  .br-pc {
+    display: none;
+  }
+  @include responsive(md) {
+    font-size: 16px;
+  }
+
+  @include responsive(lg) {
+    
+    .sp {
+      display: none;
+    }
+    .pc {
+      display: inline-block;
+    }
+    .br-sp {
+      display: none;
+    }
+    .br-pc {
+      display: inline-block;
+    }
+  }
+
+  .mainContents{
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+  
+    @include responsive(md) {
+      max-width: 1200px;
+    }
+  }
+
+  .inner{
+    @include inner()
+  }
+
+  dl{
+    dd,
+    dt{
+      color: cl(cl-black);
+    }
+  }
+
+}
+
+@media (hover: hover) {
+  body{
+    a,
+    button{
+      transition: 0.3s;
+      &:hover{
+        opacity: 0.6;
+        transition: 0.3s;
+      }
+    }
+  }
+}

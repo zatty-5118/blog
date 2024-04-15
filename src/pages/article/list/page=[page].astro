@@ -1,0 +1,168 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../../layouts/Layout.astro';
+import { BASE_URL } from '../../../scripts/modules/baseURL.js';
+import { array__allArticleData } from '../../../scripts/api/notionBlog.js';
+import '../../../styles/articleList.scss';
+
+export async function getStaticPaths({paginate}) {
+
+    return paginate(array__allArticleData, {
+            pageSize: 15,
+        }
+    );
+}
+
+const { page } = Astro.props;
+
+const totalPageNumber = Math.ceil(page.total / page.size);
+let currentPageNumber;
+currentPageNumber = page.currentPage;
+let width = 1;
+
+const paginationGenerator = () => {
+  const prev = currentPageNumber - width
+  const next = currentPageNumber + width + 1
+  const ranges = []
+  const rangeWidthDots = []
+  let length;
+  for (let i = 1; i <= totalPageNumber; i += 1) {
+    if (i === 1 || i === totalPageNumber || (i >= prev && i <= next)) {
+      ranges.push(i)
+    } else if (i < prev) {
+      i = prev - 1
+    } else if (i > next) {
+      ranges.push(totalPageNumber)
+      break
+    }
+  }
+  ranges.forEach((range) => {
+    if (length) {
+      if (range - length === 2) {
+        rangeWidthDots.push(length + 1)
+      } else if (range - length !== 1) {
+        rangeWidthDots.push('...')
+      }
+    }
+    rangeWidthDots.push(range)
+    length = range
+  })
+  return rangeWidthDots  
+}
+
+const hierarchies = [
+  {
+    position : 2,
+    itemName: '全ての記事',
+    itemPath: `${BASE_URL}/article/list/page=1`
+  },
+  {
+    position : 3,
+    itemName: `${page.currentPage}ページ目`,
+    itemPath: `${BASE_URL}/article/list/page=${page.currentPage}`
+  },
+
+]
+
+const lists = [
+    { 
+        name: `全ての記事`,
+        path: `${BASE_URL}/article/list/page=1`
+    },
+    {
+        name: `${page.currentPage}ページ目`,
+        path: `${BASE_URL}/article/list/page=${page.currentPage}`
+    }
+]
+
+---
+
+<Layout 
+    title=`全ての記事(${page.currentPage}ページ目) | zatty's Blog`
+    description="これまで投稿したブログの一覧ページです。"
+    url=`${BASE_URL}/article/list/page=${page.currentPage}`
+    hierarchies={hierarchies}
+    lists={lists}
+>
+    <main>
+        <div class="mainContents">
+            <section class="title">
+                <h1>全ての記事</h1>
+            </section>
+            <section class="articleList">
+                <ul>
+                    {page.data.map((article) =>
+                        <li>
+                            <a href={article.url}>
+                                <div class="image">
+                                    <Image src={article.thumbnail} alt={article.title} width={800} height={600}/>
+                                </div>
+                                <div class="text">
+                                    <div class="title">
+                                        <h2>{article.title}</h2>
+                                    </div>
+                                    <div class="description">
+                                        <p>{article.description}</p>
+                                    </div>
+                                    <div class="date">
+                                        <time datetime={article.date}>{`${new Date(article.date).getFullYear()}.${('0'+(new Date(article.date).getMonth()+1)).slice(-2)}.${('0'+(new Date(article.date).getDate())).slice(-2)}`}</time>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    )}
+                </ul>
+            </section> 
+            {totalPageNumber > 1 && (
+                <section class="pagiNation">
+                    <div class="first-button">
+                        {page.url.prev ? <a href={`${BASE_URL}/${page.url.prev}`}></a> : <p class="disabled"></p>}
+                    </div>
+                    <div class="number-list">
+                        <ul>
+                            {paginationGenerator().map((page) => {
+                                if (page === 1 && currentPageNumber === 1) {
+                                    return (
+                                        <li>
+                                            <p class="currentPageNumber">{page}</p>
+                                        </li>
+                                    )
+                                } else if (page === 1 && currentPageNumber > 1) {
+                                    return (
+                                        <li>
+                                            <a href={`${BASE_URL}/article/list/page=${page}`}>
+                                                {page}
+                                            </a>
+                                        </li>
+                                    )
+                                } else if (page === '...') {
+                                    return (
+                                        <li>
+                                            <p class="ellipses">{page}</p>
+                                        </li>
+                                    )
+                                } else if (page === currentPageNumber) {
+                                    return (
+                                        <li>
+                                            <p class="currentPageNumber">{page}</p>
+                                        </li>
+                                    )
+                                } 
+                                return (
+                                    <li>
+                                        <a href={`${BASE_URL}/article/list/page=${page}`}>
+                                            {page}
+                                        </a>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                    <div class="last-button">
+                        {page.url.next ? <a href={`${BASE_URL}/${page.url.next}`}></a> : <p class="disabled"></p>}
+                    </div>
+                </section>
+            )}    
+        </div>    
+    </main>
+</Layout>

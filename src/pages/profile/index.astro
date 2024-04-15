@@ -1,0 +1,140 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { BASE_URL } from '../../scripts/modules/baseURL.js';
+import { Image } from 'astro:assets';
+import { Picture } from 'astro-imagetools/components';
+import '../../styles/profilePage.scss';
+
+// 構造化データのマークアップ
+const hierarchies = [
+  {
+    position : 2,
+    itemName: 'プロフィール',
+    itemPath: `${BASE_URL}/profile`
+  },
+]
+
+// パンくずリスト
+const lists = [
+    { 
+        name: `プロフィール`,
+        path: `${BASE_URL}/profile`
+    },
+]
+
+---
+
+<Layout
+	url=`${BASE_URL}/profile`
+	title="プロフィール|zatty's Blog"
+	description="フロントエンドエンジニアの「zatty」のプロフィールをご紹介します。"
+	hierarchies={hierarchies}
+	lists={lists}
+>
+	<main class="aboutMe">
+        <div class="inner">
+            <section class="title">
+                <h1>プロフィール</h1>
+            </section>
+            <section class=profile>
+                <section class="outline">
+                    <div class="profile_icon">
+                        <img src="https://raw.githubusercontent.com/zatty-5118/portfolio/main/public/images/aboutMe/profile_icon.webp" alt="プロフィール画像" width={300} height={300} loading="lazy" decoding="async" />
+                    </div>
+                    <div class="summary">
+                        <p>2019年新卒で旅行会社に入社。商品企画や営業を経験した後、2022年にフロントエンドエンジニアの部署に配属となる。業務ではページのデザインカンプを作成するところから、コーディング、テスト、公開まで一貫して担当。JavaScriptやフレームワークを使用したページの作成を得意とし、フロントエンドだけでなくデザインにも関われることが強み。</p>
+                    </div>    
+                </section>
+                <section class="detail">
+                    <div class="profile_item">
+                        <dl>
+                            <dd>名前</dd>
+                            <dt>R.M</dt>
+                        </dl>
+                    </div>
+                    <div class="profile_item">
+                        <dl>
+                            <dd>生年月日</dd>
+                            <dt>1996/04/29</dt>
+                        </dl>
+                    </div>
+                    <div class="profile_item">
+                        <dl>
+                            <dd>出身地</dd>
+                            <dt>東京都</dt>
+                        </dl>
+                    </div>
+                    <div class="profile_item">
+                        <dl>
+                            <dd>最終学歴</dd>
+                            <dt>法政大学 卒業</dt>
+                        </dl>
+                    </div>
+                    <div class="profile_item">
+                        <dl>
+                            <dd>スキル</dd>
+                            <dt>
+                                <div>
+                                    <p>言語</p>
+                                    <p>HTML、CSS、Sass(SCSS)、JavaScript</p>
+                                </div>
+                                <div>
+                                    <p>ライブラリ</p>
+                                    <p>React</p>
+                                </div>
+                                <div>
+                                    <p>フレームワーク</p>
+                                    <p>Astro.js</p>
+                                </div>
+                                <div>
+                                    <p>開発ツール</p>
+                                    <p>Github、Visual Studio Code、npm、Node.js、vite</p>
+                                </div>
+                                <div>
+                                    <p>デザインツール</p>
+                                    <p>illustrator、Photoshop、Adobe XD</p>
+                                </div>
+                            </dt>
+                        </dl>
+                    </div>
+                    <div class="profile_item">
+                        <dl>
+                            <dd>趣味</dd>
+                            <dt>
+                                <div>
+                                    <p>野球観戦</p>
+                                    <p>横浜DeNAベイスターズの大ファン（ファン歴17年）です。</p>
+                                </div>
+                                <div>
+                                    <p>旅行</p>
+                                    <p>好きな旅先はハワイと宮古島です！<br />好きなビーチは「カイルアビーチ」と「与那覇前浜ビーチ」です！</p>
+                                </div>
+                                <div>
+                                    <p>テニス</p>
+                                    <p>小学校1年生の頃から続けている大好きなスポーツです。</p>
+                                </div>
+                                <div>
+                                    <p>スキー</p>
+                                    <p>中級レベルのコースまでなら転ばずに滑られます。</p>
+                                </div>
+                            </dt>
+                        </dl>
+                    </div>
+                    <div class="profile_item">
+                        <dl>
+                            <dd>リンク</dd>
+                            <dt>
+                                <div class="link">
+                                    <a href="https://github.com/zatty-5118/" target="_blank">Github</a>
+                                </div>
+                                <div class="link">
+                                    <a href="https://zatty-5118.github.io/portfolio/" target="_blank">ポートフォリオ</a>
+                                </div>
+                            </dt>
+                        </dl>
+                    </div>
+                </section>        
+            </section>
+        </div>
+	</main>
+</Layout>

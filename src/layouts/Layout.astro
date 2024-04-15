@@ -1,0 +1,33 @@
+---
+import MetaData from '../components/MetaData.astro';
+import StructuredData from '../components/Breadcrumb/StructuredData.astro';
+import Breadcrumb from '../components/Breadcrumb/Breadcrumb.astro';
+import GoogleFonts from '../components/GoogleFonts.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { ViewTransitions } from 'astro:transitions';
+import '../styles/global/global.scss';
+import '../styles/vendor/reset.scss';
+const { url,title,description,hierarchies,lists } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+  	<head>
+		<MetaData 
+			url={url}
+			title={title}
+			description={description}
+            lists={lists}
+		/>
+		<GoogleFonts />
+		<ViewTransitions />
+		<StructuredData hierarchies={hierarchies} />
+	</head>
+  	<body>
+		<Header />
+        <Breadcrumb lists={lists}/>
+        <slot />
+		<Footer />
+  	</body>
+</html>

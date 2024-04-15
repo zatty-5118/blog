@@ -1,0 +1,26 @@
+---
+const { hierarchies } = Astro.props;
+
+const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": '',
+            "name": "my Blog"
+        },
+        ...(hierarchies
+            ? hierarchies.map((hierarchy) => ({
+                "@type": "ListItem",
+                "position": hierarchy.position,
+                "item": `${Astro.site}${hierarchy.itemPath}`,
+                "name": hierarchy.itemName
+            }))
+        : [])
+    ]
+    };
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

@@ -1,0 +1,103 @@
+footer{
+    // margin-top: rem(72);
+    margin-top: 6rem;
+
+    .scrollTop{
+        background-color: cl(cl-lightYellow);
+        position: relative;
+        height: 70px;
+
+        button{
+            cursor: pointer;
+            color: cl(cl-white);
+            background-color: cl(cl-darkYellow);
+            border: 1px solid cl(cl-darkYellow);
+            border-radius: 50%;
+            display: inline-block;
+            width: 130px;
+            height: 130px;
+            text-align: center;
+            line-height: 130px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+        }
+
+    }
+
+    .inner{
+        @include inner();
+    }
+
+    .blogContents{
+        background-color: cl(cl-lightYellow);
+        padding: rem(16) 0;
+
+        .title{
+            p{
+                color: cl(cl-darkYellow);
+                font-weight: 700;    
+            }
+        }
+
+        .link{
+            ul{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: rem(16);
+                margin-top: rem(16);
+
+                li{
+                    a{
+                        display: inline-block;
+                        color: cl(cl-darkYellow);
+                    }
+                }
+            }
+        }
+    }
+
+    .myContents{
+        padding: rem(16) 0;
+        background-color: cl(cl-yellow);
+
+        .title{
+            p{
+                color: cl(cl-darkYellow);
+                font-weight: 700;
+            }
+        }
+
+        .link{
+            ul{
+                display: flex;
+                gap: rem(16);
+                margin-top: rem(16);
+
+                li{
+                    a{
+                        display: inline-block;
+                        color: cl(cl-darkYellow);
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    .copyRight{
+        background-color: cl(cl-darkYellow);
+        padding: rem(16);
+
+        p{
+            color: cl(cl-white);
+            text-align: end;
+        }
+
+    }
+}

@@ -1,0 +1,24 @@
+---
+const { url,title,description } = Astro.props;
+import favicon  from '../../public/images/favicon.ico';
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="theme-color" content="#e9f5fb">
+
+<title>{title}</title>
+
+<meta name="description" content={description} />
+<meta property="og:title" content={title} />
+<meta property="og:url" content=`${url}` />
+<meta property="og:description" content={description} />
+<meta property="og:image" content="https://raw.githubusercontent.com/zatty-5118/blog/main/public/images/ogImage.jpg" />
+<meta property="og:site_name" content={title} />
+<meta property="og:type" content="article" />
+<meta property="og:locale" content="ja_JP" />
+<link rel="icon" href=`${favicon}`>
+<link rel="apple-touch-icon" sizes="180x180" href=`${favicon}`>
+<link rel="shortcut icon" type="image/vnd.microsoft.icon" href=`${favicon}` />

@@ -1,0 +1,75 @@
+/* ------------ ▼ px→rem 変換関数 rem(1) = 1px ▼ ------------ */
+@use 'sass:math';
+$baseFontsize: 16;
+@function rem($pixel) {
+	@return math.div($pixel, $baseFontsize) * 1rem;
+}
+/* ------------ ▲ px→rem 変換関数 rem(1) = 1px ▲ ------------ */
+
+$colors: (
+  cl-black: #333333,
+  cl-white: #ffffff,
+  cl-gray: #f2f2f2,
+  cl-lightYellow: #f8f8dd,
+  cl-yellow: #edecbf,
+  cl-darkYellow: #b3a557
+);
+
+@function cl($key) {
+  @return map-get($colors, $key);
+}
+
+$breakpoints: (
+  'xs': (
+    min-width: 0,
+  ),
+  'sm': (
+    min-width: 576px,
+  ),
+  'md': (
+    min-width: 768px,
+  ),
+  'lg': (
+    min-width: 992px,
+  ),
+  'xl': (
+    min-width: 1200px,
+  ),
+  'xxl': (
+    min-width: 1400px,
+  ),
+) !default; //　~~pxから適用
+
+@mixin responsive($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media screen and #{inspect(map-get($breakpoints,$breakpoint))} {
+      @content;
+    }
+  } @else {
+    @error "指定のbreakpointは元々設定されていません。";
+  }
+}
+
+@mixin inner {
+  margin: 0 auto;
+  max-width: 430px;
+  width: 90%;
+
+  @include responsive(md) {
+    max-width: 652.8px;
+    width: 100%;    
+  }
+
+  @include responsive(lg) {
+    max-width: 843.2px;
+  }
+
+  @include responsive(xl) {
+    max-width: 1020px;
+  }
+
+  @include responsive(xxl) {
+    max-width: 1190px;
+  }
+
+}

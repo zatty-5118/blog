@@ -1,0 +1,83 @@
+---
+// header・footerの読み込み
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// 構造化データの読み込み
+import StructuredData from '../components/Breadcrumb/StructuredData.astro';
+
+// パンくずの読み込み
+import Breadcrumb from '../components/Breadcrumb/Breadcrumb.astro';
+
+// GoogleFontsの読み込み
+import GoogleFonts from '../components/GoogleFonts.astro';
+
+// ページ遷移アニメーションの読み込み
+import { ViewTransitions } from 'astro:transitions';
+
+// 共通cssファイルの読み込み
+import '../styles/global/global.scss';
+import '../styles/vendor/reset.scss';
+import '../styles/articlePage.scss';
+
+
+const {frontmatter} = Astro.props;
+
+const hierarchies = [
+  {
+    position : 2,
+    itemName: `${frontmatter.title}`,
+    itemPath: `${frontmatter.url}`
+  }
+]
+
+const lists = [
+  { 
+    name: `${frontmatter.title}`,
+    path: `${frontmatter.url}`
+  }
+]
+
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+  	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="theme-color" content="#e9f5fb">
+
+		<title>{`${frontmatter.title} | zatty's Blog`}</title>
+
+		<meta name="description" content={frontmatter.description} />
+		<meta property="og:title" content={`${frontmatter.title} | zatty's Blog`} />
+		<meta property="og:url" content=`${frontmatter.url}` />
+		<meta property="og:description" content={frontmatter.description} />
+		<meta property="og:image" content="" />
+		<meta property="og:site_name" content="my Blog" />
+		<meta property="og:type" content="article" />
+		<meta property="og:locale" content="ja_JP" />
+
+		<!-- <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/images/common/favicon.ico" />
+		<link rel="icon" href="https://bigs.jp/images/common/favicon.ico" /> -->
+
+		<GoogleFonts />
+
+		<ViewTransitions />
+
+		<StructuredData hierarchies={hierarchies} />
+
+	</head>
+  	<body>
+		<Header />
+		<Breadcrumb lists={lists}/>
+		<main>
+			<article>
+				<slot />
+			</article>
+		</main>
+		<Footer />
+  	</body>
+</html>

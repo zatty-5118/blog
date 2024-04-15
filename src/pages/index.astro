@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { BASE_URL } from '../scripts/modules/baseURL.js';
+import { array__allArticleData } from '../scripts/api/notionBlog.js';
+import { array__allCategory } from '../scripts/array__allCategory.js';
+import { array__allNewsData } from '../scripts/api/notionNews.js';
+import { Image } from 'astro:assets';
+import { Picture } from 'astro-imagetools/components';
+import '../styles/topPage.scss';
+
+const hierarchies = []
+
+const lists = []
+
+
+---
+
+<Layout
+	url=`${BASE_URL}/`
+	title="zatty's Blog"
+	description="フロントエンドエンジニアの「zatty」が制作したAstro.jsベースのブログページです。記事はnotionで記述しています。「お知らせ」はNotion APIを使って表示させています。シンプルで見やすいデザインにしました。"
+	hierarchies={hierarchies}
+	lists={lists}
+>
+	<main>
+		<section class="mainView">
+			<div class="mainView_image">
+				<Picture
+					src="/public/images/mainView/mainView_sp.jpg"
+					alt="zatty's Blog トップ画像"
+					loading="null"
+					decoding="null"
+					placeholder="none"
+					artDirectives={[
+						{
+							media: '(min-width: 768px)',
+							src: '/public/images/mainView/mainView_pc.jpg',
+						},
+					]}
+			  	/>	  
+			</div>
+		</section>
+		<section class="newArticle">
+			<div class="inner">
+				<h2>新着記事</h2>
+				<ul>
+					{array__allArticleData.map((article) =>
+						<li>
+							<a href={`${BASE_URL}/article/view/${article.slug}`}>
+								<div class="image">
+									<Image src={article.thumbnail} alt={article.title} width={800} height={600}/>
+								</div>
+								<div class="text">
+									<div class="title">
+										<h3>{article.title}</h3>
+									</div>
+									<div class="description">
+										<p>{article.description}</p>
+									</div>
+									<div class="date">
+                                        <time datetime={article.date}>{`${new Date(article.date).getFullYear()}.${('0'+(new Date(article.date).getMonth()+1)).slice(-2)}.${('0'+(new Date(article.date).getDate())).slice(-2)}`}</time>
+                                    </div>
+								</div>
+							</a>
+						</li>
+					)}
+				</ul>
+				<div class="link">
+					<a href=`${BASE_URL}/article/list/page=1`>もっと見る</a>
+				</div>
+			</div>
+		</section>
+		<section class="categoryList">
+			<div class="inner">
+				<h2>カテゴリー</h2>
+				<div>
+					<ul>
+						{array__allCategory.map((value) =>
+							<li class={value.categorySlug}>
+								<a href={`${BASE_URL}/article/category/${value.categorySlug}/page=1`}>{value.category}</a>
+							</li>
+						)}
+					</ul>
+				</div>	
+			</div>
+		</section>
+		<section class="newsList">
+			<div class="inner">
+				<h2>お知らせ</h2>
+				<ul>
+					{array__allNewsData.map((news) =>
+						<li>
+							<div class="head">
+								<div class="date">
+									<time datetime={news.date}>{`${new Date(news.date).getFullYear()}/${('0'+(new Date(news.date).getMonth()+1)).slice(-2)}/${('0'+(new Date(news.date).getDate())).slice(-2)}`}</time>
+								</div>
+								<div class="category">
+									<p class={`${news.color === "blue" ? "blue" : "yellow"}`}>{news.category}</p>
+								</div>
+							</div>
+							<div class="title">
+								<p>{news.title}</p>
+							</div>
+						</li>
+					)}	
+				</ul>	
+			</div>
+		</section>	
+	</main>
+</Layout>
