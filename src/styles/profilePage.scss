@@ -1,18 +1,18 @@
 .aboutMe{
-    margin-top: 3rem;
+    margin-top: rem(48);
 
     .title{
-        margin-bottom: 2rem;
+        margin-bottom: rem(32);
     }
 
     .profile{
         display: grid;
         grid-template-columns: repeat(1,1fr);
-        gap: 1rem;
+        gap: rem(16);
 
         @include responsive(md){
             grid-template-columns: repeat(2,1fr);
-            gap: 2rem;
+            gap: rem(32);
         }
 
     
@@ -27,7 +27,7 @@
         &_icon{
             display: flex;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin-bottom: rem(32);
             img{
                 width:150px;
                 height:150px;
@@ -51,7 +51,7 @@
                 flex-wrap: wrap;
                 width: 100%;
                 border-bottom: 1px dashed cl(cl-gray);
-                padding: 1rem 0;
+                padding: rem(16) 0;
         
                 dd{
                     width: 30%;
@@ -64,7 +64,7 @@
                     width: 70%;
                     display: flex;
                     flex-direction: column;
-                    gap: 1rem;
+                    gap: rem(16);
     
                     div{
                         p{
@@ -90,7 +90,7 @@
                             cursor: pointer; 
                             display: flex;
                             align-items: center;
-                            gap: 0.25rem;
+                            gap: rem(4);
                             width: inherit;
                             height: inherit;
 

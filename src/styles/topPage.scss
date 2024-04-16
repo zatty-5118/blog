@@ -1,27 +1,9 @@
-// .mainView{
-//     position: relative;
-
-//     &_title{
-//         position: absolute;
-//         top: 50%;
-//         left: 50%;
-//         transform: translate(-50%, -50%);
-//         z-index: 2;
-
-//         h1{
-//             img{
-//                 width: 100%;
-//                 min-width: 250px
-//             }
-//         }
-//     }
-// }
-
 .newArticle{
     padding: rem(32) 0;
     background-color: cl(cl-lightYellow);
     h2{
         margin-bottom: rem(16);
+        font-weight: 700;
     }
     ul{
         display: grid;
@@ -61,8 +43,9 @@
                 min-height: 130px;
 
     
-                h2{
+                h3{
                     font-size: rem(18);
+                    font-weight: 700;
                 }
                 p{
                     font-size: rem(12);
