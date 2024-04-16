@@ -8,11 +8,13 @@ import { Image } from 'astro:assets';
 import { Picture } from 'astro-imagetools/components';
 import '../styles/topPage.scss';
 
-const hierarchies = []
+const publishedArticle = array__allArticleData.filter((value) => {
+  return value.published;
+});
 
-const lists = []
+const hierarchies = [];
 
-
+const lists = [];
 ---
 
 <Layout
@@ -44,7 +46,7 @@ const lists = []
 			<div class="inner">
 				<h2>新着記事</h2>
 				<ul>
-					{array__allArticleData.map((article) =>
+					{publishedArticle.map((article) =>
 						<li>
 							<a href={`${BASE_URL}/article/view/${article.slug}`}>
 								<div class="image">

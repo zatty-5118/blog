@@ -12,9 +12,7 @@ export const array__allCategory = [
         categorySlug:"travel",
     },
     {
-        category: "フロントエンエンド",
+        category: "フロントエンド",
         categorySlug:"frontend",
     },
-
-
 ]

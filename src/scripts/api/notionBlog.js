@@ -11,6 +11,7 @@ const responseBlog = await notionBlog.databases.query({
 	database_id: DATABASE_ID,
 });
 
+
 const array__allArticleData = [];
 
 responseBlog.results.map((value) => {

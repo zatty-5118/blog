@@ -7,6 +7,7 @@ import { array__allCategory } from '../../../../scripts/array__allCategory.js';
 import '../../../../styles/articleList.scss';
 
 export async function getStaticPaths({paginate}) {
+  console.log(array__allArticleData);
   array__allArticleData.filter((article) => {
     return array__allCategory.filter((value) => {
       if(article.category.includes(value.category)){
@@ -69,6 +70,10 @@ const paginationGenerator = () => {
   return rangeWidthDots  
 }
 
+const publishedArticle = article.filter((value) => {
+  return value.published;
+});
+
 // 構造化データのマークアップ
 const hierarchies = [
   {
@@ -112,7 +117,7 @@ const lists = [
           <h1>「{category_ja}」の記事一覧</h1>
         </div>
         <ul>
-          {article.map((value) =>
+          {publishedArticle.map((value) =>
             <li>
               <a href={value.url}>
                 <div class="image">
