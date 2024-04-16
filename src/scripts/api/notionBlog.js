@@ -11,7 +11,6 @@ const responseBlog = await notionBlog.databases.query({
 	database_id: DATABASE_ID,
 });
 
-
 const array__allArticleData = [];
 
 responseBlog.results.map((value) => {
@@ -28,6 +27,5 @@ responseBlog.results.map((value) => {
 
     array__allArticleData.push(obj)
 });
-
 
 export {notionBlog, responseBlog, array__allArticleData}

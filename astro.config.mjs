@@ -37,6 +37,9 @@ export default defineConfig({
       cssCodeSplit: true
     }
   },
+  markdown: {
+    syntaxHighlight: 'prism',
+  },
   markdownOptions: {
     render: [
 	    '@astrojs/markdown-remark',

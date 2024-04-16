@@ -2,7 +2,7 @@ article{
     padding-bottom: rem(72);
     h1{
         text-align: center;
-        margin: rem(8) 0;
+        margin: rem(16) 0;
     }
 
     #mainView{
@@ -73,7 +73,7 @@ article{
         h2,
         h3,
         h4{
-            margin-bottom: rem(8);
+            margin-bottom: rem(16);
         }
 
         h2{
@@ -104,8 +104,8 @@ article{
             &::first-letter {
                 padding: rem(8) 0 rem(8) rem(8);
                 color: cl(cl-darkYellow);
-                border-left: 5px solid;
-                border-bottom: 1px solid;
+                border-left: 3px solid;
+                border-bottom: 3px solid;
             }
         }
 
@@ -131,6 +131,48 @@ article{
                 margin-top: rem(4);
                 color: #888;
                 font-size: rem(12);
+            }
+        }
+
+        ul{
+            margin: rem(16) 0;
+            display: flex;
+            flex-direction: column;
+            gap: rem(8);
+
+            li{
+                color: #333333;
+                display: flex;
+
+                &::before{
+                    content: '・';
+                }
+            }
+        }
+
+        pre{
+            background-color: #25292f;
+            padding: rem(16);
+            border-radius: 5px;
+
+            code{
+                font-family: "Noto Sans JP", sans-serif;
+
+                .hljs-tag{
+                    color: #7e7e7e;
+                }
+
+                .hljs-attr{
+                    color: #9CDCFE;
+                }
+
+                .hljs-string{
+                    color: #CE9178;
+                }
+
+                .hljs-name{
+                    color: #569CD6;
+                }
             }
         }
 
