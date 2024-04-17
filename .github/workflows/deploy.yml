@@ -3,6 +3,10 @@ name: Deploy to GitHub Pages
 on:
   # `main` ブランチにプッシュするたびにワークフローを実行します
   # 異なるブランチ名を使用する場合は、`main` をブランチ名に置き換えてください
+
+  # 50分ごとにGithub Actionsを実行する
+  schedule:
+    - cron: "*/50 * * * *"
   push:
     branches: [ main ]
   # このワークフローを GitHub の Actions タブから手動で実行できるようにします。
