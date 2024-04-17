@@ -73,7 +73,7 @@ article{
         h2,
         h3,
         h4{
-            margin-bottom: rem(16);
+            margin: rem(32) 0;
         }
 
         h2{
@@ -84,9 +84,7 @@ article{
             outline-offset: 2px;
             background: cl(cl-yellow);
             color: #353535;
-            // font-size: 26px;
             font-weight: bold;
-            margin: rem(32) 0;
             &::before{
                 position: absolute;
                 top: calc(100% + 2px);
@@ -143,6 +141,7 @@ article{
             li{
                 color: #333333;
                 display: flex;
+                font-size: rem(14);
 
                 &::before{
                     content: '・';

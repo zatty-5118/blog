@@ -6,7 +6,8 @@ on:
 
   # 50分ごとにGithub Actionsを実行する
   schedule:
-    - cron: "*/50 * * * *"
+    # - cron: "*/50 * * * *"
+    - cron: "0 */1 * * *"
   push:
     branches: [ main ]
   # このワークフローを GitHub の Actions タブから手動で実行できるようにします。
