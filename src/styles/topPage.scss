@@ -41,7 +41,9 @@
                 padding: rem(16);
                 border-radius: 0 0 10px 10px;
                 min-height: 130px;
-
+                display: flex;
+                flex-direction: column;
+                gap: rem(8);
     
                 h3{
                     font-size: rem(18);
@@ -54,7 +56,6 @@
                     -webkit-box-orient: vertical;
                     -webkit-line-clamp: 2;
                     overflow: hidden;
-                    margin-top: rem(8); 
                 }
                 time{
                     font-size: rem(12);

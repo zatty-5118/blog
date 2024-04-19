@@ -7,7 +7,6 @@ import { array__allCategory } from '../../../../scripts/array__allCategory.js';
 import '../../../../styles/articleList.scss';
 
 export async function getStaticPaths({paginate}) {
-  console.log(array__allArticleData);
   array__allArticleData.filter((article) => {
     return array__allCategory.filter((value) => {
       if(article.category.includes(value.category)){
