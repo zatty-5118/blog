@@ -27,12 +27,23 @@
                 flex-direction: column;
                 box-shadow: 0 3px 10px rgba(0,0,0,.2);
                 border-radius: 10px;
+
+                @include hover{
+                    .image{
+                        img{
+                            transform: scale(1.1);
+                            transition: 0.3s all;
+                        }
+                    }
+                }
             }
 
             .image{
+                overflow: hidden;
                 img{
                     aspect-ratio: 16/9;
                     border-radius: 10px 10px 0 0;
+                    transition: 0.3s all;
                 }
             }
 

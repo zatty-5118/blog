@@ -25,12 +25,23 @@
             a{
                 display: flex;
                 flex-direction: column;
-                gap: rem(8);    
+                gap: rem(8);
+
+                @include hover{
+                    .image{
+                        img{
+                            transform: scale(1.1);
+                            transition: 0.3s all;
+                        }
+                    }
+                }
             }
 
             .image{
+                overflow: hidden;
                 img{
                     aspect-ratio: 16/9;
+                    transition: 0.3s all;
                 }
             }
 

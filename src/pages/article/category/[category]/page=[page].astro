@@ -118,7 +118,7 @@ const lists = [
         <ul>
           {publishedArticle.map((value) =>
             <li>
-              <a href={value.url}>
+              <a href={`${BASE_URL}/article/view/${value.slug}`}>
                 <div class="image">
                   <Image src={value.thumbnail} alt={value.title} width={800} height={600}/>
                 </div>
