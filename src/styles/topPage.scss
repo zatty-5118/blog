@@ -1,6 +1,6 @@
 .newArticle{
     padding: rem(32) 0;
-    background-color: cl(cl-lightYellow);
+    background-color: cl(cl-primary-light);
     h2{
         margin-bottom: rem(16);
         font-weight: 700;
@@ -20,7 +20,7 @@
         }
 
         li{
-            // border-bottom: 1px dashed cl(cl-yellow);
+            // border-bottom: 1px dashed cl(cl-primary);
             // padding-bottom: rem(16);
             a{
                 display: flex;
@@ -48,7 +48,7 @@
             }
 
             .text{
-                background-color: cl(cl-white);
+                background-color: cl(cl-base);
                 padding: rem(16);
                 border-radius: 0 0 10px 10px;
                 min-height: 130px;
@@ -62,7 +62,7 @@
                 }
                 p{
                     font-size: rem(12);
-                    color: #7f7f7f;
+                    color: cl(cl-gray-text);
                     display: -webkit-box;
                     -webkit-box-orient: vertical;
                     -webkit-line-clamp: 2;
@@ -92,8 +92,8 @@
         a{
             border-radius: 50px;
             padding: rem(8);
-            color: cl(cl-white);
-            background-color: cl(cl-darkYellow);
+            color: cl(cl-base);
+            background-color: cl(cl-primary-dark);
             max-width: 150px;
             text-align: center;
             font-size: rem(14);
@@ -118,54 +118,15 @@
             a{
                 text-decoration: underline;
                 font-weight: 700;
-                color: cl(cl-darkYellow);
+                color: cl(cl-primary-dark);
             }
         }
-
-        // li{
-        //     a{
-        //         color: cl(cl-white);
-        //         padding: rem(8);
-        //         border-radius: 50px;
-        //         width: 145px;
-        //         display: flex;
-        //         justify-content: center;
-
-        //         @include responsive(md) {
-        //             width: 160px;
-        //         }
-        //     }
-        // }
-
-        // .diary{
-        //     a{
-        //         background-color: #b36957;
-        //     }
-        // }
-
-        // .hobby{
-        //     a{
-        //         background-color: #57b366;
-        //     }
-        // }
-
-        // .travel{
-        //     a{
-        //         background-color: #5780b3;
-        //     }
-        // }
-
-        // .frontend{
-        //     a{
-        //         background-color: cl(cl-darkYellow);
-        //     }
-        // }
     }
 }
 
 .newsList{
     padding: rem(32) 0 rem(88);
-    background-color: #f7f7f7;
+    background-color: cl(cl-base-bg);
 
     h2{
         margin-bottom: rem(16);
@@ -175,7 +136,7 @@
         display: grid;
         grid-template-columns: repeat(1,1fr);
         gap: rem(8);
-        background-color: cl(cl-white);
+        background-color: cl(cl-base);
         border-radius: 5px;
         padding: 1rem;
         max-height: 250px;
@@ -185,7 +146,7 @@
         li{
             display: flex;
             flex-direction: column;
-            border-bottom: 1px solid cl(cl-gray);
+            border-bottom: 1px solid cl(cl-gray-border);
             padding-bottom: rem(8);
 
             p{
@@ -200,25 +161,25 @@
 
                 .date{
                     time{
-                        color: #7f7f7f;
+                        color: cl(cl-gray-text);
                     }
                 }
 
                 .category{
                     width: 60px;
                     p{
-                        color: cl(cl-white);
+                        color: cl(cl-base);
                         border-radius: 5px;
                         font-size: 12px;
                         text-align: center;
                     }
 
-                    .blue{
-                        background-color: #5780b3;
+                    .portfolio{
+                        background-color: #6699CC;
                     }
 
-                    .yellow{
-                        background-color: cl(cl-darkYellow);
+                    .blog{
+                        background-color: cl(cl-primary-dark);
                     }
 
                 }

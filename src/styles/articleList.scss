@@ -19,7 +19,7 @@
         }
 
         li{
-            border-bottom: 1px dashed cl(cl-yellow);
+            border-bottom: 1px dashed cl(cl-primary);
             padding-bottom: rem(16);
 
             a{
@@ -55,7 +55,7 @@
                 }
                 p{
                     font-size: rem(12);
-                    color: #7f7f7f;
+                    color: cl(cl-gray-text);
                     display: -webkit-box;
                     -webkit-box-orient: vertical;
                     -webkit-line-clamp: 2;

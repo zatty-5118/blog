@@ -38,8 +38,8 @@ article{
                     width: inherit;
                     font-size: rem(14);
                     cursor: pointer;
-                    color: cl(cl-white);
-                    background-color: cl(cl-darkYellow);
+                    color: cl(cl-base);
+                    background-color: cl(cl-primary-dark);
                     min-width: 60px;
                     padding: rem(4);
                     border-radius: 50px;
@@ -50,7 +50,7 @@ article{
 
             .date{
                 time{
-                    color: cl(cl-black);
+                    color: cl(cl-text);
                     display: flex;
                     justify-content: flex-end;
                     font-size: rem(14);
@@ -80,10 +80,10 @@ article{
 
             position: relative;
             padding: rem(4);
-            outline: 2px solid #353535;
+            outline: 2px solid cl(cl-title);
             outline-offset: 2px;
-            background: cl(cl-yellow);
-            color: #353535;
+            background: cl(cl-primary);
+            color: cl(cl-title);
             font-weight: bold;
             &::before{
                 position: absolute;
@@ -92,7 +92,7 @@ article{
                 height: 20px;
                 width: 15px;
                 background-color: white;
-                border-right: 2px solid #353535;
+                border-right: 2px solid cl(cl-title);
                 content: "";
             }
         }
@@ -101,7 +101,7 @@ article{
             padding-top: rem(8);
             &::first-letter {
                 padding: rem(8) 0 rem(8) rem(8);
-                color: cl(cl-darkYellow);
+                color: cl(cl-primary-dark);
                 border-left: 3px solid;
                 border-bottom: 3px solid;
             }
@@ -127,7 +127,7 @@ article{
 
             figcaption{
                 margin-top: rem(4);
-                color: #888;
+                color: cl(cl-gray-text);
                 font-size: rem(12);
             }
         }
@@ -139,7 +139,7 @@ article{
             gap: rem(8);
 
             li{
-                color: #333333;
+                color: cl(cl-text);
                 display: flex;
                 font-size: rem(14);
 
@@ -148,33 +148,5 @@ article{
                 }
             }
         }
-
-        pre{
-            background-color: #25292f;
-            padding: rem(24);
-            border-radius: 5px;
-            overflow-x: auto;
-            
-            code{
-                font-family: "Noto Sans JP", sans-serif;
-
-                .hljs-tag{
-                    color: #7e7e7e;
-                }
-
-                .hljs-attr{
-                    color: #9CDCFE;
-                }
-
-                .hljs-string{
-                    color: #CE9178;
-                }
-
-                .hljs-name{
-                    color: #569CD6;
-                }
-            }
-        }
-
     }
 }

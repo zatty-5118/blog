@@ -28,14 +28,14 @@
       a,
       span{
         font-size: rem(12);
-        color: cl(cl-black);
+        color: cl(cl-text);
       }
 
       &:not(:last-of-type){
         &::after{
           content: "›";
           margin: rem(8) 0;
-          color: #777;
+          color: cl(cl-gray-text);
         }
       }
 

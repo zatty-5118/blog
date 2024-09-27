@@ -50,7 +50,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 width: 100%;
-                border-bottom: 1px dashed cl(cl-gray);
+                border-bottom: 1px dashed cl(cl-gray-border);
                 padding: rem(16) 0;
         
                 dd{
@@ -84,7 +84,7 @@
 
                     .link{        
                         a{
-                            color: cl(cl-black);
+                            color: cl(cl-text);
                             text-decoration: underline;
                             font-size: 14px;
                             cursor: pointer; 
@@ -98,7 +98,7 @@
                                 content: '';
                                 mask: url(https://raw.githubusercontent.com/zatty-5118/portfolio/08f979ddd7f2ed365b459eb65fe9466934152ff7/public/images/icon/link_icon.svg) no-repeat center center / contain;
                                 -webkit-mask: url(https://raw.githubusercontent.com/zatty-5118/portfolio/08f979ddd7f2ed365b459eb65fe9466934152ff7/public/images/icon/link_icon.svg) no-repeat center center / contain;
-                                background: cl(cl-black);
+                                background: cl(cl-text);
                                 display: inline-block;
                                 width: 15px;
                                 height: 15px;

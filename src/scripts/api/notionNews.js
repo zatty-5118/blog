@@ -16,7 +16,6 @@ responseNews.results.map((news) => {
 	const obj = {};
 	obj.title = news.properties.Title.title[0].text.content;
 	obj.category = news.properties.Category.select.name;
-	obj.color = news.properties.Category.select.color;
 	obj.date = news.properties.Date.date.start;
 	array__allNewsData.push(obj);
 });

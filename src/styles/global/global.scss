@@ -9,7 +9,7 @@ body{
     height: 100%;
     width: 100%;
     text-decoration: none;
-    color: cl(cl-black);
+    color: cl(cl-text);
   }
 
   img {
@@ -68,7 +68,7 @@ body{
   dl{
     dd,
     dt{
-      color: cl(cl-black);
+      color: cl(cl-text);
     }
   }
 

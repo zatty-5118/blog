@@ -1,5 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { BASE_URL } from '../scripts/modules/baseURL.js';
+import blogLogo  from '../../public/images/footer/footer_blog_logo.svg';
+import portfolioLogo  from '../../public/images/footer/footer_portfolio_logo.svg';
 import '../styles/global/footer.scss';
 ---
 
@@ -9,41 +12,72 @@ import '../styles/global/footer.scss';
         <button transition:persist>ページTOPへ</button>
     </div>
     <div class="wrapper">
-        <div class="blogContents">
-            <div class="inner">
-                <div class="title">
-                    <p>Blog Contents</p>
-                </div>
-                <div class="link">
-                    <ul>
-                        <li>
-                            <a href=`${BASE_URL}/`>トップ</a>
-                        </li>
-                        <li>
-                            <a href=`${BASE_URL}/article/list/page=1`>全ての記事</a>
-                        </li>
-                        <li>
-                            <a href=`${BASE_URL}/profile`>プロフィール</a>
-                        </li>
-                    </ul>
+        <!-- <div class="contents">
+            <div class="blogContents">
+                <div class="inner">
+                    <div class="title">
+                        <p>Blog Contents</p>
+                    </div>
+                    <div class="link">
+                        <ul>
+                            <li>
+                                <a href=`${BASE_URL}/`>トップ</a>
+                            </li>
+                            <li>
+                                <a href=`${BASE_URL}/article/list/page=1`>全ての記事</a>
+                            </li>
+                            <li>
+                                <a href=`${BASE_URL}/profile`>プロフィール</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="myContents">
+                <div class="inner">
+                    <div class="title">
+                        <p>zatty's Contents</p>
+                    </div>
+                    <div class="link">
+                        <ul>
+                            <li>
+                                <a href="https://zatty-5118.github.io/portfolio/" target="_blank">ポートフォリオ</a>
+                            </li>
+                            <li>
+                                <a href="https://zatty-5118.github.io/blog/" target="_blank">ブログ</a>
+                            </li>
+                        </ul>
+                    </div>    
+                </div>
+            </div>    
+        </div> -->
         <div class="myContents">
             <div class="inner">
                 <div class="title">
-                    <p>zatty's Contents</p>
+                    <p>my Contents</p>
                 </div>
-                <div class="link">
-                    <ul>
-                        <li>
-                            <a href="https://zatty-5118.github.io/portfolio/" target="_blank">ポートフォリオ</a>
-                        </li>
-                        <li>
-                            <a href="https://zatty-5118.github.io/blog/" target="_blank">ブログ</a>
-                        </li>
-                    </ul>
-                </div>    
+                <ul>
+                    <li>
+                        <a href="https://zatty-5118.github.io/portfolio/" target="_blank">
+                            <div class="image">
+                                <Image src={portfolioLogo} alt="zatty'sBlogのロゴ" width={portfolioLogo.width} height={portfolioLogo.height}></Image>
+                            </div>
+                            <div class="text">
+                                <p>フロントエンドエンジニアの「zatty」が制作した<br>Next.jsベースのポートフォリオです。</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://zatty-5118.github.io/blog/" target="_blank">
+                            <div class="image">
+                                <Image src={blogLogo} alt="zatty'sBlogのロゴ" width={blogLogo.width} height={blogLogo.height}></Image>
+                            </div>
+                            <div class="text">
+                                <p>フロントエンドエンジニアの「zatty」が制作した<br>Astro.jsとNotion APIを活用したブログです。</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="copyRight">

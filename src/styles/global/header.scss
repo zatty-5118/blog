@@ -1,10 +1,7 @@
 header{
     padding: rem(8);
-    background-color: cl(cl-darkYellow);
-    border-bottom: 3px solid #edeabf;
-    // position: sticky;
-    // top: 0;
-    // z-index: 10;
+    background-color: cl(cl-primary-dark);
+    border-bottom: 3px solid cl(cl-primary-light);
 
     .wrapper{
         display: flex;
@@ -31,6 +28,14 @@ header{
 
     }
 
+    .logo{
+        a{
+            img{
+                max-width: 140px;
+            }
+        }
+    }
+
     .menu{
         display: flex;
         align-items: center;
@@ -38,7 +43,7 @@ header{
 
         &_item{
             a{
-                color: cl(cl-white);
+                color: cl(cl-base);
             }
         }
     }

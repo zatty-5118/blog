@@ -7,12 +7,16 @@ $baseFontsize: 16;
 /* ------------ ▲ px→rem 変換関数 rem(1) = 1px ▲ ------------ */
 
 $colors: (
-  cl-black: #333333,
-  cl-white: #ffffff,
-  cl-gray: #f2f2f2,
-  cl-lightYellow: #f8f8dd,
-  cl-yellow: #edecbf,
-  cl-darkYellow: #b3a557
+  cl-base: #fff,
+  cl-base-bg: #f7f7f7,
+  cl-text: #333,
+  cl-title: #353535,
+  cl-primary: #d5ccc2,
+  cl-primary-light: #eae5e0,
+  cl-primary-dark: #b1a08a,
+  cl-gray-text: #7f7f7f,
+  cl-gray-border: #ddd,
+  cl-gray-bg: #f5f5f5
 );
 
 @function cl($key) {

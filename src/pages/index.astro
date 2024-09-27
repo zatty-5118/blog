@@ -72,20 +72,6 @@ const lists = [];
 				</div>
 			</div>
 		</section>
-		<!-- <section class="categoryList">
-			<div class="inner">
-				<h2>カテゴリー</h2>
-				<div>
-					<ul>
-						{array__allCategory.map((value) =>
-							<li class={value.categorySlug}>
-								<a href={`${BASE_URL}/article/category/${value.categorySlug}/page=1`}>{value.category}</a>
-							</li>
-						)}
-					</ul>
-				</div>	
-			</div>
-		</section> -->
 		<section class="newsList">
 			<div class="inner">
 				<h2>お知らせ</h2>
@@ -97,7 +83,7 @@ const lists = [];
 									<time datetime={news.date}>{`${new Date(news.date).getFullYear()}/${('0'+(new Date(news.date).getMonth()+1)).slice(-2)}/${('0'+(new Date(news.date).getDate())).slice(-2)}`}</time>
 								</div>
 								<div class="category">
-									<p class={`${news.color === "blue" ? "blue" : "yellow"}`}>{news.category}</p>
+									<p class={`${news.category === "portfolio" ? "portfolio" : "blog"}`}>{news.category}</p>
 								</div>
 							</div>
 							<div class="title">
@@ -106,6 +92,20 @@ const lists = [];
 						</li>
 					)}	
 				</ul>	
+			</div>
+		</section>
+		<section class="categoryList">
+			<div class="inner">
+				<h2>カテゴリー</h2>
+				<div>
+					<ul>
+						{array__allCategory.map((value) =>
+							<li class={value.categorySlug}>
+								<a href={`${BASE_URL}/article/category/${value.categorySlug}/page=1`}>{value.category}</a>
+							</li>
+						)}
+					</ul>
+				</div>	
 			</div>
 		</section>	
 	</main>
