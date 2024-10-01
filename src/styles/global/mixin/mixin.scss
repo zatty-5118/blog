@@ -16,7 +16,9 @@ $colors: (
   cl-primary-dark: #b1a08a,
   cl-gray-text: #7f7f7f,
   cl-gray-border: #ddd,
-  cl-gray-bg: #f5f5f5
+  cl-gray-bg: #f5f5f5,
+  cl-brand-portfolio: #3d85cc,
+
 );
 
 @function cl($key) {
