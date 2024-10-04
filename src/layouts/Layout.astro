@@ -10,7 +10,7 @@ import { ViewTransitions } from 'astro:transitions';
 import '../styles/global/global.scss';
 import '../styles/vendor/reset.scss';
 const { url,title,description,hierarchies,lists } = Astro.props;
-const VITE_GTM_ID = import.meta.env.VITE_GTM_ID;
+const GOOGLE_TAG_MANAGER = import.meta.env.GOOGLE_TAG_MANAGER;
 ---
 
 <!DOCTYPE html>
@@ -22,13 +22,13 @@ const VITE_GTM_ID = import.meta.env.VITE_GTM_ID;
 			description={description}
             lists={lists}
 		/>
-		<GoogleTagManeger id={VITE_GTM_ID}/>
+		<GoogleTagManeger id={GOOGLE_TAG_MANAGER}/>
 		<GoogleFonts />
 		<ViewTransitions />
 		<StructuredData hierarchies={hierarchies} />
 	</head>
   	<body>
-		<Header id={VITE_GTM_ID}/>
+		<Header id={GOOGLE_TAG_MANAGER}/>
         <Breadcrumb lists={lists}/>
         <slot />
 		<Footer />
