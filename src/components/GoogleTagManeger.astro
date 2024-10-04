@@ -1,6 +1,6 @@
 ---
-const GTM_CODE = import.meta.env.GTM_CODE;
-const test = "GTM-PNHHN8D3"
+// const { id } = Astro.props;
+// const VITE_GTM_ID = import.meta.env.VITE_GTM_ID;
 ---
 <script type="text/partytown">
     (function (w, d, s, l, i) {
@@ -12,5 +12,5 @@ const test = "GTM-PNHHN8D3"
       j.async = true;
       j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
       f.parentNode.insertBefore(j, f);
-    })(window, document, "script", "dataLayer", "GTM-PNHHN8D3");
+    })(window, document, "script", "dataLayer", `${import.meta.env.VITE_GTM_ID}`);
 </script>
