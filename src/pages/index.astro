@@ -8,9 +8,11 @@ import { Image } from 'astro:assets';
 import { Picture } from 'astro-imagetools/components';
 import '../styles/topPage.scss';
 
-const publishedArticle = array__allArticleData.filter((value) => {
+const filterArticleData = array__allArticleData.filter((value) => {
   return value.published;
 });
+
+const publishedArticle = filterArticleData.slice(0, 6);
 
 const hierarchies = [];
 
