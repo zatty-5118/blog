@@ -3,6 +3,7 @@ import MetaData from '../components/MetaData.astro';
 import StructuredData from '../components/Breadcrumb/StructuredData.astro';
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb.astro';
 import GoogleFonts from '../components/GoogleFonts.astro';
+import GoogleTagManeger from '../components/GoogleTagManeger.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { ViewTransitions } from 'astro:transitions';
@@ -20,6 +21,7 @@ const { url,title,description,hierarchies,lists } = Astro.props;
 			description={description}
             lists={lists}
 		/>
+		<GoogleTagManeger />
 		<GoogleFonts />
 		<ViewTransitions />
 		<StructuredData hierarchies={hierarchies} />

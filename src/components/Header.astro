@@ -3,9 +3,15 @@ import { Image } from 'astro:assets';
 import { BASE_URL } from '../scripts/modules/baseURL.js';
 import logo  from '../../public/images/header/header_blog_logo.svg';
 import '../styles/global/header.scss';
+const GTM_CODE = import.meta.env.GTM_CODE;
 ---
 
 <header>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PNHHN8D3"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div class="wrapper">
         <div class="logo">
             <a href=`${BASE_URL}/`>
