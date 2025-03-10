@@ -110,6 +110,10 @@ article{
         p{
             font-size: rem(14);
             margin: rem(16) 0;
+            line-height: 2;
+            @include responsive(lg){
+                font-size: rem(16);
+            }    
         }
 
         img{
