@@ -59,6 +59,10 @@
                 h3{
                     font-size: rem(18);
                     font-weight: 700;
+                    min-height: 52px;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    overflow: hidden;
                 }
                 p{
                     font-size: rem(12);

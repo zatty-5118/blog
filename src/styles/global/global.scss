@@ -10,6 +10,13 @@ body{
     width: 100%;
     text-decoration: none;
     color: cl(cl-text);
+    transition: 0.3s;
+    &:hover{
+      opacity: 0.6;
+    }
+    @include hover {
+      opacity: 0.6;
+    }
   }
 
   img {
@@ -72,17 +79,4 @@ body{
     }
   }
 
-}
-
-@media (hover: hover) {
-  body{
-    a,
-    button{
-      transition: 0.3s;
-      &:hover{
-        opacity: 0.6;
-        transition: 0.3s;
-      }
-    }
-  }
 }

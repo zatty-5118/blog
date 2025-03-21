@@ -2,22 +2,12 @@
   margin: 0 auto;
   max-width: 430px;
   width: 90%;
+  overflow-x: auto;
+  word-break: keep-all;
+  white-space: nowrap;
 
   @include responsive(md) {
-    max-width: 652.8px;
-    width: 100%;    
-  }
-
-  @include responsive(lg) {
-    max-width: 843.2px;
-  }
-
-  @include responsive(xl) {
-    max-width: 1020px;
-  }
-
-  @include responsive(xxl) {
-    max-width: 1190px;
+    max-width: 680px;
   }
 
   ol{

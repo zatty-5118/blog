@@ -1,10 +1,6 @@
 article{
     padding-bottom: rem(72);
-    h1{
-        text-align: center;
-        margin: rem(16) 0;
-    }
-
+    
     #mainView{
         width: 100%;
         margin: 0 auto rem(24);
@@ -17,6 +13,15 @@ article{
             max-height: 500px;
             border-radius: 0;
             margin: 0;
+        }
+
+        .title{
+            width: 90%;
+            margin: rem(16) auto;
+            @include responsive(md){
+                width: 100%;
+                max-width: 680px;
+            }
         }
 
         .info{
