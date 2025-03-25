@@ -64,26 +64,20 @@ const document = dom.window.document;
 const figures = Array.from(document.querySelectorAll("figure"));
 let imageGroup = [];
 figures.forEach((figure, index) => {
-    const prev = figures[index - 1]; // 直前の figure
-    const next = figures[index + 1]; // 次の figure
+    const prev = figures[index - 1];
+    const next = figures[index + 1];
 
     if (!prev || prev.nextElementSibling !== figure) {
-        // 新しい image-group を作成
         imageGroup = [figure];
     } else {
-        // 連続する figure を追加
         imageGroup.push(figure);
     }
-
     if (!next || figure.nextElementSibling !== next) {
-        // 連続する figure が終わったら <div> で囲む
         if (imageGroup.length > 1) {
             const div = document.createElement("div");
             div.className = "image-wrapper";
             imageGroup.forEach(fig => div.appendChild(fig.cloneNode(true)));
             imageGroup[0].parentNode.replaceChild(div, imageGroup[0]);
-
-            // すでに div に入れた figure は削除
             imageGroup.slice(1).forEach(fig => fig.remove());
         }
     }
@@ -137,7 +131,7 @@ html = html.replace(/<table>[\s\S]*?<tbody>([\s\S]*?)<\/tbody>[\s\S]*?<\/table>/
         .trim();
 });
 html = html.replace(/(<dt>.*?<\/dt><dd>.*?<\/dd>)/g, '<dl>$1</dl>');
-console.log(html)
+
 const hierarchies = [
     {
         position : 2,
