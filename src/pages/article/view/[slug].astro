@@ -5,12 +5,15 @@ import { BASE_URL } from '../../../scripts/modules/baseURL';
 import { responseBlog,notionBlog,array__allArticleData } from '../../../scripts/api/notionBlog.js';
 import { array__allCategory } from '../../../scripts/array__allCategory.js';
 import { NotionToMarkdown } from "notion-to-md";
+import { unified } from 'unified';
+import { JSDOM } from "jsdom";
 import rehypeStringify from 'rehype-stringify';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
-import { unified } from 'unified';
 import remarkUnwrapImages from 'remark-unwrap-images';
 import rehypeFigure from "@microflash/rehype-figure";
+import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
 import '../../../styles/articlePage.scss';
 
 export async function getStaticPaths() {
@@ -43,19 +46,98 @@ const { slug } = Astro.params;
 const { response,notion,id,title,thumbnail,date,category_ja,category_slug,published,description } = Astro.props;
 
 const n2m = new NotionToMarkdown({ notionClient: notion });
-
 const mdblocks = await n2m.pageToMarkdown(id);
 const mdString = n2m.toMarkdownString(mdblocks);
 const processor = unified();
+processor.use(remarkParse, { fragment: true });
+processor.use(remarkGfm);
 processor.use(remarkUnwrapImages);
 processor.use(remarkRehype);
-
-processor.use(rehypeStringify);
-processor.use(remarkParse, { fragment: true });
+processor.use(rehypeRaw);
 processor.use(rehypeFigure);
+processor.use(rehypeStringify);
 
-const html = await processor.process(mdString.parent);
+let html = String(await processor.process(mdString.parent));
 
+const dom = new JSDOM(html);
+const document = dom.window.document;
+const figures = Array.from(document.querySelectorAll("figure"));
+let imageGroup = [];
+figures.forEach((figure, index) => {
+    const prev = figures[index - 1]; // 直前の figure
+    const next = figures[index + 1]; // 次の figure
+
+    if (!prev || prev.nextElementSibling !== figure) {
+        // 新しい image-group を作成
+        imageGroup = [figure];
+    } else {
+        // 連続する figure を追加
+        imageGroup.push(figure);
+    }
+
+    if (!next || figure.nextElementSibling !== next) {
+        // 連続する figure が終わったら <div> で囲む
+        if (imageGroup.length > 1) {
+            const div = document.createElement("div");
+            div.className = "image-wrapper";
+            imageGroup.forEach(fig => div.appendChild(fig.cloneNode(true)));
+            imageGroup[0].parentNode.replaceChild(div, imageGroup[0]);
+
+            // すでに div に入れた figure は削除
+            imageGroup.slice(1).forEach(fig => fig.remove());
+        }
+    }
+});
+
+const headings = [...document.querySelectorAll("h2")];
+if (headings.length > 0) {
+    const firstH2 = headings[0];
+
+    const introSection = document.createElement("section");
+    introSection.classList.add("introduction");
+    let nextElem = document.body.firstChild;
+
+    while (nextElem && nextElem !== firstH2) {
+        const moveElem = nextElem;
+        nextElem = nextElem.nextSibling;
+        introSection.appendChild(moveElem);
+    }
+
+    document.body.insertBefore(introSection, firstH2);
+}
+headings.forEach((h2) => {
+    const section = document.createElement("section");
+    section.classList.add("topic");
+    h2.parentNode.insertBefore(section, h2);
+    section.appendChild(h2);
+
+    let nextElem = section.nextSibling;
+
+    while (nextElem && !(nextElem.tagName && nextElem.tagName.toLowerCase() === "h2")) {
+        const moveElem = nextElem;
+        nextElem = nextElem.nextSibling;
+        section.appendChild(moveElem);
+    }
+});
+html = dom.serialize();
+
+html = html.replace(/<table>[\s\S]*?<tbody>([\s\S]*?)<\/tbody>[\s\S]*?<\/table>/g, match => {
+    return match
+        .replace(/<thead>[\s\S]*?<\/thead>/g, '')
+        .replace(/<tr>(.*?)<\/tr>/g, (_, tr) => {
+            const cells = tr.match(/<td[^>]*>(.*?)<\/td>/g);
+            if (cells && cells.length >= 2) {
+                const dt = cells[0].replace(/<\/?td[^>]*>/g, '').trim();
+                const dd = cells.slice(1).map(td => td.replace(/<\/?td[^>]*>/g, '').trim()).join(', ');
+                return `<dt>${dt}</dt><dd>${dd}</dd>`;
+            }
+            return '';
+        })
+        .replace(/<table>|<\/table>|<tbody>|<\/tbody>/g, '')
+        .trim();
+});
+html = html.replace(/(<dt>.*?<\/dt><dd>.*?<\/dd>)/g, '<dl>$1</dl>');
+console.log(html)
 const hierarchies = [
     {
         position : 2,
@@ -71,7 +153,6 @@ const lists = [
         path: `${BASE_URL}/article/view/${slug}`
     },
 ];
-
 ---
 
 <Layout 
@@ -101,9 +182,7 @@ const lists = [
                     </div>
                 </section>
             </section>
-            <section id="mainContent">
-                {html}
-            </section>        
+            <section id="mainContent" set:html={html}></section>
         </article>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" is:inline></script>

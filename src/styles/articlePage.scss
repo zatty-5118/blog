@@ -121,6 +121,15 @@ article{
             }    
         }
 
+        .image-wrapper{
+            display: grid;
+            grid-template-columns: repeat(1,1fr);
+            @include responsive(md){
+                gap: rem(16);
+                grid-template-columns: repeat(2,1fr);
+            }
+        }
+
         img{
             aspect-ratio: 16/9;
             border-radius: 5px;
