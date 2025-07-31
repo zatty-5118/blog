@@ -85,7 +85,10 @@ const lists = [];
 									<time datetime={news.date}>{`${new Date(news.date).getFullYear()}/${('0'+(new Date(news.date).getMonth()+1)).slice(-2)}/${('0'+(new Date(news.date).getDate())).slice(-2)}`}</time>
 								</div>
 								<div class="category">
-									<p class={`${news.category === "Portfolio" ? "portfolio" : "blog"}`}>{news.category}</p>
+									<p class={`${
+									news.category === "Portfolio" ? "portfolio" : news.category === "Blog" ? "blog" : 
+									"storybook"
+									}`}>{news.category}</p>
 								</div>
 							</div>
 							<div class="title">

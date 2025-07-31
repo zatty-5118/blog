@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { BASE_URL } from '../scripts/modules/baseURL.js';
 import blogLogo  from '../../public/images/footer/footer_blog_logo.svg';
 import portfolioLogo  from '../../public/images/footer/footer_portfolio_logo.svg';
+import sbLogo  from '../../public/images/footer/footer_sb_logo.svg';
 import '../styles/global/footer.scss';
 ---
 
@@ -60,7 +61,7 @@ import '../styles/global/footer.scss';
                     <li>
                         <a href="https://zatty-5118.github.io/portfolio/" target="_blank">
                             <div class="image">
-                                <Image src={portfolioLogo} alt="zatty'sBlogのロゴ" width={portfolioLogo.width} height={portfolioLogo.height}></Image>
+                                <Image src={portfolioLogo} alt="zatty's Portfolioのロゴ" width={portfolioLogo.width} height={portfolioLogo.height}></Image>
                             </div>
                             <div class="text">
                                 <p>フロントエンドエンジニアの「zatty」が制作した<br>Next.jsベースのポートフォリオです。</p>
@@ -70,10 +71,20 @@ import '../styles/global/footer.scss';
                     <li>
                         <a href="https://zatty-5118.github.io/blog/" target="_blank">
                             <div class="image">
-                                <Image src={blogLogo} alt="zatty'sBlogのロゴ" width={blogLogo.width} height={blogLogo.height}></Image>
+                                <Image src={blogLogo} alt="zatty's Blogのロゴ" width={blogLogo.width} height={blogLogo.height}></Image>
                             </div>
                             <div class="text">
                                 <p>フロントエンドエンジニアの「zatty」が制作した<br>Astro.jsとNotion APIを活用したブログです。</p>
+                            </div>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="https://zatty-5118.github.io/storybook/" target="_blank">
+                            <div class="image">
+                                <Image src={sbLogo} alt="zatty's Storybookのロゴ" width={sbLogo.width} height={sbLogo.height}></Image>
+                            </div>
+                            <div class="text">
+                                <p>フロントエンドエンジニアの「zatty」が制作した<br />Vite×React×Storybookで作成したUIカタログ集です。</p>
                             </div>
                         </a>
                     </li>
