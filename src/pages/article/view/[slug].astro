@@ -147,6 +147,7 @@ const lists = [
         path: `${BASE_URL}/article/view/${slug}`
     },
 ];
+const boolArticlePage = true;
 ---
 
 <Layout 
@@ -155,6 +156,7 @@ const lists = [
     url=`${BASE_URL}/article/view/${slug}`
     hierarchies={hierarchies}
     lists={lists}
+    articlePage={boolArticlePage}
 >
     <main>
         <article>

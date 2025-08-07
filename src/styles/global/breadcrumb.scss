@@ -5,9 +5,8 @@
   overflow-x: auto;
   word-break: keep-all;
   white-space: nowrap;
-
   @include responsive(md) {
-    max-width: 680px;
+    max-width: 1180px;
   }
 
   ol{
@@ -36,4 +35,12 @@
     }
   }
   
+}
+
+.articlePage {
+  #breadcrumbList{
+    @include responsive(md) {
+      max-width: 680px;
+    }
+  }
 }

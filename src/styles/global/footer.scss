@@ -37,7 +37,7 @@ footer{
             grid-template-columns: repeat(2, 1fr);
             gap: rem(32);
 
-            @include responsive(md){
+            @include responsive(lg){
                 display: flex;
                 align-items: center;
                 justify-content: center;

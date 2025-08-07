@@ -1,10 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ArticleCard from '../components/modules/Card/ArticleCard';
+import SearchForm from '../components/modules/Search/SearchForm.jsx';
 import { BASE_URL } from '../scripts/modules/baseURL.js';
 import { array__allArticleData } from '../scripts/api/notionBlog.js';
 import { array__allCategory } from '../scripts/array__allCategory.js';
 import { array__allNewsData } from '../scripts/api/notionNews.js';
-import { Image } from 'astro:assets';
 import { Picture } from 'astro-imagetools/components';
 import '../styles/topPage.scss';
 
@@ -14,9 +15,18 @@ const filterArticleData = array__allArticleData.filter((value) => {
 
 const publishedArticle = filterArticleData.slice(0, 6);
 
+const pubYears = Array.from(
+new Set(
+	array__allArticleData
+		.map(item => item.date?.slice(0, 4).toString())
+		.filter(Boolean)
+)).sort(); 
+
 const hierarchies = [];
 
 const lists = [];
+
+const boolArticlePage = false;
 ---
 
 <Layout
@@ -25,6 +35,7 @@ const lists = [];
 	description="フロントエンドエンジニアの「zatty」が制作したAstro.jsベースのブログページです。ブログ記事はnotionで記述し、APIを使って表示させています。シンプルで見やすいデザインにしました。"
 	hierarchies={hierarchies}
 	lists={lists}
+	articlePage={boolArticlePage}
 >
 	<main>
 		<section class="mainView">
@@ -47,33 +58,32 @@ const lists = [];
 		<section class="newArticle">
 			<div class="inner">
 				<h2>新着記事</h2>
-				<ul>
-					{publishedArticle.map((article) =>
-						<li>
-							<a href={`${BASE_URL}/article/view/${article.slug}`}>
-								<div class="image">
-									<Image src={article.thumbnail} alt={article.title} width={800} height={600}/>
-								</div>
-								<div class="text">
-									<div class="title">
-										<h3>{article.title}</h3>
-									</div>
-									<div class="description">
-										<p>{article.description}</p>
-									</div>
-									<div class="date">
-                                        <time datetime={article.date}>{`${new Date(article.date).getFullYear()}.${('0'+(new Date(article.date).getMonth()+1)).slice(-2)}.${('0'+(new Date(article.date).getDate())).slice(-2)}`}</time>
-                                    </div>
-								</div>
-							</a>
-						</li>
-					)}
-				</ul>
+				<ArticleCard articles={publishedArticle} cardType="shadow" client:load/>
 				<div class="link">
 					<a href=`${BASE_URL}/article/list/page=1`>もっと見る</a>
 				</div>
 			</div>
 		</section>
+		<section class="searchArticle">
+			<div class="inner">
+				<h2>記事を検索</h2>
+				<SearchForm years={pubYears} client:load/>
+			</div>
+		</section>
+		<section class="categoryList">
+			<div class="inner">
+				<h2>カテゴリー</h2>
+				<div>
+					<ul>
+						{array__allCategory.map((value) =>
+							<li class={value.categorySlug}>
+								<a href={`${BASE_URL}/article/category/${value.categorySlug}/page=1`}>{value.category}</a>
+							</li>
+						)}
+					</ul>
+				</div>	
+			</div>
+		</section>	
 		<section class="newsList">
 			<div class="inner">
 				<h2>お知らせ</h2>
@@ -99,19 +109,5 @@ const lists = [];
 				</ul>	
 			</div>
 		</section>
-		<section class="categoryList">
-			<div class="inner">
-				<h2>カテゴリー</h2>
-				<div>
-					<ul>
-						{array__allCategory.map((value) =>
-							<li class={value.categorySlug}>
-								<a href={`${BASE_URL}/article/category/${value.categorySlug}/page=1`}>{value.category}</a>
-							</li>
-						)}
-					</ul>
-				</div>	
-			</div>
-		</section>	
 	</main>
 </Layout>

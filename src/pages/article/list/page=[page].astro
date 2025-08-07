@@ -1,9 +1,10 @@
 ---
-import { Image } from 'astro:assets';
 import Layout from '../../../layouts/Layout.astro';
+import ArticleCard from '../../../components/modules/Card/ArticleCard';
+import Pagination from '../../../components/modules/Pagination/Pagination.astro';
+import { Image } from 'astro:assets';
 import { BASE_URL } from '../../../scripts/modules/baseURL.js';
 import { array__allArticleData } from '../../../scripts/api/notionBlog.js';
-import '../../../styles/articleList.scss';
 
 export async function getStaticPaths({paginate}) {
 
@@ -78,7 +79,7 @@ const lists = [
         path: `${BASE_URL}/article/list/page=${page.currentPage}`
     }
 ]
-
+const boolArticlePage = false;
 ---
 
 <Layout 
@@ -87,6 +88,7 @@ const lists = [
     url=`${BASE_URL}/article/list/page=${page.currentPage}`
     hierarchies={hierarchies}
     lists={lists}
+    articlePage={boolArticlePage}
 >
     <main>
         <div class="mainContents">
@@ -94,79 +96,17 @@ const lists = [
                 <h1>全ての記事</h1>
             </section>
             <section class="articleList">
-                <ul>
-                    {publishedArticle.map((article) =>
-                        <li>
-                            <a href={`${BASE_URL}/article/view/${article.slug}`}>
-                                <div class="image">
-                                    <Image src={article.thumbnail} alt={article.title} width={800} height={600}/>
-                                </div>
-                                <div class="text">
-                                    <div class="title">
-                                        <h2>{article.title}</h2>
-                                    </div>
-                                    <div class="description">
-                                        <p>{article.description}</p>
-                                    </div>
-                                    <div class="date">
-                                        <time datetime={article.date}>{`${new Date(article.date).getFullYear()}.${('0'+(new Date(article.date).getMonth()+1)).slice(-2)}.${('0'+(new Date(article.date).getDate())).slice(-2)}`}</time>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    )}
-                </ul>
-            </section> 
-            {totalPageNumber > 1 && (
-                <section class="pagiNation">
-                    <div class="first-button">
-                        {page.url.prev ? <a href={`${BASE_URL}/${page.url.prev}`}></a> : <p class="disabled"></p>}
-                    </div>
-                    <div class="number-list">
-                        <ul>
-                            {paginationGenerator().map((page) => {
-                                if (page === 1 && currentPageNumber === 1) {
-                                    return (
-                                        <li>
-                                            <p class="currentPageNumber">{page}</p>
-                                        </li>
-                                    )
-                                } else if (page === 1 && currentPageNumber > 1) {
-                                    return (
-                                        <li>
-                                            <a href={`${BASE_URL}/article/list/page=${page}`}>
-                                                {page}
-                                            </a>
-                                        </li>
-                                    )
-                                } else if (page === '...') {
-                                    return (
-                                        <li>
-                                            <p class="ellipses">{page}</p>
-                                        </li>
-                                    )
-                                } else if (page === currentPageNumber) {
-                                    return (
-                                        <li>
-                                            <p class="currentPageNumber">{page}</p>
-                                        </li>
-                                    )
-                                } 
-                                return (
-                                    <li>
-                                        <a href={`${BASE_URL}/article/list/page=${page}`}>
-                                            {page}
-                                        </a>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </div>
-                    <div class="last-button">
-                        {page.url.next ? <a href={`${BASE_URL}/${page.url.next}`}></a> : <p class="disabled"></p>}
-                    </div>
-                </section>
-            )}    
+                <ArticleCard articles={publishedArticle} cardType="border" client:load/>
+            </section>
+            <Pagination
+                totalPageNumber={totalPageNumber}
+                currentPageNumber={currentPageNumber}
+                paginationGenerator={paginationGenerator}
+                page={page}
+                BASE_URL={BASE_URL}
+                category="list"
+                slug=""
+            />
         </div>    
     </main>
 </Layout>

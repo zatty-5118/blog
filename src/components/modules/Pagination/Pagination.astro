@@ -1,0 +1,79 @@
+---
+import "./Pagination.scss"
+import { Image } from 'astro:assets';
+
+const {
+    totalPageNumber,
+    currentPageNumber,
+    paginationGenerator,
+    page,
+    BASE_URL,
+    category,
+    slug,
+} = Astro.props;
+---
+
+{totalPageNumber > 1 && (
+    <section class="pagiNation">
+        <div class="inner">
+            <div class="wrapper">
+                <div class="prevButton">
+                    {page.url.prev ? (
+                        <a href={`${BASE_URL}/${page.url.prev}`}></a>
+                    ) : (
+                        <p class="disabled"></p>
+                    )}
+                </div>
+
+                <ul class="numberList">
+                    {paginationGenerator().map((pageItem, index) => {
+                        if (pageItem === 1 && currentPageNumber === 1) {
+                            return (
+                                <li>
+                                    <p class="currentPageNumber">{pageItem}</p>
+                                </li>
+                            );
+                        } else if (pageItem === 1 && currentPageNumber > 1) {
+                            return (
+                                <li>
+                                    <a href={slug === "" ? `${BASE_URL}/article/${category}/page=${pageItem}` : `${BASE_URL}/article/${category}/${slug}/page=${pageItem}`}>
+                                    {pageItem}
+                                    </a>
+                                </li>
+                            );
+                        } else if (pageItem === '...') {
+                            return (
+                                <li>
+                                    <p class="ellipses">{pageItem}</p>
+                                </li>
+                            );
+                        } else if (pageItem === currentPageNumber) {
+                            return (
+                                <li>
+                                    <p class="currentPageNumber">{pageItem}</p>
+                                </li>
+                            );
+                        } else {
+                            return (
+                                <li>
+                                    <a href={slug === "" ? `${BASE_URL}/article/${category}/page=${pageItem}` : `${BASE_URL}/article/${category}/${slug}/page=${pageItem}`}>
+                                    {pageItem}
+                                    </a>
+                                </li>
+                            );
+                        }
+                    })}
+                </ul>
+
+                <div class="nextButton">
+                    {page.url.next ? (
+                        <a href={`${BASE_URL}/${page.url.next}`}></a>
+                    ) : (
+                        <p class="disabled"></p>
+                    )}
+                </div>
+
+            </div>
+        </div>
+    </section>
+)}

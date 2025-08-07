@@ -1,16 +1,20 @@
 ---
-import MetaData from '../components/MetaData.astro';
-import StructuredData from '../components/Breadcrumb/StructuredData.astro';
-import Breadcrumb from '../components/Breadcrumb/Breadcrumb.astro';
-import GoogleFonts from '../components/GoogleFonts.astro';
-import GoogleTagManeger from '../components/GoogleTagManeger.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import MetaData from '../components/common/MetaData.astro';
+import StructuredData from '../components/common/Breadcrumb/StructuredData.astro';
+import Breadcrumb from '../components/common/Breadcrumb/Breadcrumb.astro';
+import GoogleFonts from '../components/common/GoogleFonts.astro';
+import GoogleTagManeger from '../components/common/GoogleTagManeger.astro';
+import Header from '../components/common/Header.astro';
+import Footer from '../components/common/Footer.astro';
 import { ViewTransitions } from 'astro:transitions';
 import '../styles/global/global.scss';
 import '../styles/vendor/reset.scss';
-const { url,title,description,hierarchies,lists } = Astro.props;
+const { url,title,description,hierarchies,lists,articlePage } = Astro.props;
 const GOOGLE_TAG_MANAGER = import.meta.env.GOOGLE_TAG_MANAGER;
+
+const classArticlePage = articlePage ? "articlePage" : "";
+
+console.log(articlePage)
 ---
 
 <!DOCTYPE html>
@@ -27,7 +31,7 @@ const GOOGLE_TAG_MANAGER = import.meta.env.GOOGLE_TAG_MANAGER;
 		<ViewTransitions />
 		<StructuredData hierarchies={hierarchies} />
 	</head>
-  	<body>
+  	<body class={classArticlePage}>
 		<Header id={GOOGLE_TAG_MANAGER}/>
         <Breadcrumb lists={lists}/>
         <slot />

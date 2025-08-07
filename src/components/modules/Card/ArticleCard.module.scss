@@ -1,0 +1,109 @@
+.article{
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        gap: rem(32);
+
+        @include responsive(md){
+            grid-template-columns: repeat(2,1fr);
+        }
+
+        @include responsive(lg){
+            grid-template-columns: repeat(3,1fr);
+            gap: rem(48);
+        }
+
+        &.type__shadow{
+            li{
+                a{
+                    box-shadow: 0 3px 10px rgba(0,0,0,.2);
+                    border-radius: 10px;
+
+                    .image{
+                        border-radius: 10px 10px 0 0;
+                        img{
+                            border-radius: 10px 10px 0 0;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        &.type__border{
+            li{
+                border-bottom: 1px dashed cl(cl-primary);
+
+                a{
+                    .image{
+                        img{
+                            border-radius: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &__card {        
+        a{
+            display: flex;
+            flex-direction: column;
+
+            @include hover{
+                .image{
+                    img{
+                        transform: scale(1.1);
+                        transition: 0.3s all;
+                    }
+                }
+            }    
+        }
+
+        .image{
+            overflow: hidden;
+
+            img{
+                aspect-ratio: 16/9;
+                transition: 0.3s all;
+            }
+        }
+
+        .text{
+            background-color: cl(cl-base);
+            padding: rem(16);
+            border-radius: 0 0 10px 10px;
+            min-height: 162px;
+            display: flex;
+            flex-direction: column;
+            gap: rem(8);
+
+            h3{
+                font-size: rem(18);
+                font-weight: 700;
+                min-height: 52px;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                overflow: hidden;
+            }
+            p{
+                font-size: rem(12);
+                color: #7f7f7f;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                overflow: hidden;
+            }
+            time{
+                font-size: rem(12);
+                display: flex;
+                justify-content: flex-end;
+
+                @include responsive(md){
+                    font-size: rem(14);
+                }
+        
+            }    
+        }
+    }       
+}

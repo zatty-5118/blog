@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SearchResults from '../../components/modules/Search/SearchResults.jsx';
+import { BASE_URL } from '../../scripts/modules/baseURL.js';
+import { array__allArticleData } from '../../scripts/api/notionBlog.js';
+import "../../components/modules/Search/SearchResult.scss";
+const hierarchies = [
+	{
+		position : 2,
+		itemName: `検索結果`,
+		itemPath: `${BASE_URL}/search/`
+	},
+
+];
+
+const lists = [
+	{ 
+		name: `検索結果`,
+		path: `${BASE_URL}/search/`
+	},
+
+];
+
+---
+<Layout
+	url=`${BASE_URL}/search/`
+	title="検索結果 | zatty's Blog"
+	description="zatty's Blogの記事検索ページです。完全静的なWebサイト上で、キーワード・カテゴリー・投稿年ごとの絞り込みが可能。記事タイトル・説明文を対象にリアルタイムで絞り込み表示します。"
+	hierarchies={hierarchies}
+	lists={lists}
+	articlePage="false"
+>
+	<main>
+        <div class="inner">
+            <SearchResults client:load data={array__allArticleData}/>
+        </div>
+	</main>
+</Layout>

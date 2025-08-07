@@ -15,8 +15,4 @@ export const array__allCategory = [
         category: "フロントエンド",
         categorySlug:"frontend",
     },
-    {
-        category: "レシピ",
-        categorySlug:"recipe",
-    },
 ]

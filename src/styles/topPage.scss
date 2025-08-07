@@ -1,92 +1,10 @@
 .newArticle{
     padding: rem(32) 0;
     background-color: cl(cl-primary-light);
+    
     h2{
         margin-bottom: rem(16);
         font-weight: 700;
-    }
-    ul{
-        display: grid;
-        grid-template-columns: repeat(1,1fr);
-        gap: rem(32);
-
-        @include responsive(md){
-            grid-template-columns: repeat(2,1fr);
-        }
-
-        @include responsive(lg){
-            grid-template-columns: repeat(3,1fr);
-            gap: rem(48);
-        }
-
-        li{
-            // border-bottom: 1px dashed cl(cl-primary);
-            // padding-bottom: rem(16);
-            a{
-                display: flex;
-                flex-direction: column;
-                box-shadow: 0 3px 10px rgba(0,0,0,.2);
-                border-radius: 10px;
-
-                @include hover{
-                    .image{
-                        img{
-                            transform: scale(1.1);
-                            transition: 0.3s all;
-                        }
-                    }
-                }
-            }
-
-            .image{
-                overflow: hidden;
-                img{
-                    aspect-ratio: 16/9;
-                    border-radius: 10px 10px 0 0;
-                    transition: 0.3s all;
-                }
-            }
-
-            .text{
-                background-color: cl(cl-base);
-                padding: rem(16);
-                border-radius: 0 0 10px 10px;
-                min-height: 130px;
-                display: flex;
-                flex-direction: column;
-                gap: rem(8);
-    
-                h3{
-                    font-size: rem(18);
-                    font-weight: 700;
-                    min-height: 52px;
-                    -webkit-box-orient: vertical;
-                    -webkit-line-clamp: 2;
-                    overflow: hidden;
-                }
-                p{
-                    font-size: rem(12);
-                    color: cl(cl-gray-text);
-                    display: -webkit-box;
-                    -webkit-box-orient: vertical;
-                    -webkit-line-clamp: 2;
-                    overflow: hidden;
-                    min-height: 40px;
-                }
-                time{
-                    font-size: rem(12);
-                    display: flex;
-                    justify-content: flex-end;
-    
-                    @include responsive(md){
-                        font-size: rem(14);
-                    }
-            
-                }    
-            }
-            
-        }
-
     }
 
     .link{
@@ -105,6 +23,10 @@
             // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5647058824);
         }
     }
+}
+
+.searchArticle{
+    padding: rem(32) 0;
 }
 
 .categoryList{
