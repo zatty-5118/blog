@@ -67,8 +67,9 @@
         a,
         p{
             &::before{
-                mask: url("/public/images/allow-left-white.svg") no-repeat center center / contain;
-                -webkit-mask: url("/public/images/allow-left-white.svg") no-repeat center center / contain;
+                mask: url("/public/images/icon/icon-arrow-normal.svg") no-repeat center center / contain;
+                -webkit-mask: url("/public/images/icon/icon-arrow-normal.svg") no-repeat center center / contain;
+                transform: rotate(90deg);
             }
         }
     }
@@ -77,8 +78,9 @@
         a,
         p{
             &::before{
-                mask: url("/public/images/allow-right-white.svg") no-repeat center center / contain;
-                -webkit-mask: url("/public/images/allow-right-white.svg") no-repeat center center / contain;
+                mask: url("/public/images/icon/icon-arrow-normal.svg") no-repeat center center / contain;
+                -webkit-mask: url("/public/images/icon/icon-arrow-normal.svg") no-repeat center center / contain;
+                transform: rotate(270deg);
             }
         }
     }

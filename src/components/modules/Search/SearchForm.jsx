@@ -8,6 +8,23 @@ export default function SearchForm({years}) {
     const [category, setCategory] = useState('');
     const [pubYear, setPubYear] = useState('');
 
+    useEffect(() => {
+        const handlePageShow = (event) => {
+            if (event.persisted) {
+                setKeyword('');
+                setCategory('');
+                setBrand('');
+                setPubYear('');
+            }
+        };
+
+        window.addEventListener('pageshow', handlePageShow);
+        return () => {
+            window.removeEventListener('pageshow', handlePageShow);
+        };
+    }, []);
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -29,31 +46,34 @@ export default function SearchForm({years}) {
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
                 />
-
             </div>
             <div className={styles.searchForm__field}>
-                <select 
-                    value={category} 
-                    onChange={(e) => setCategory(e.target.value)}
-                    className={category === '' ? "" : `${styles.selected}`}
-                >
-                    <option value="">カテゴリーを選択</option>
-                    {array__allCategory.map((option, idx) => (
-                        <option key={idx} value={option.category}>
-                            {option.category}
-                        </option>
-                    ))}
-                </select>
-                <select 
-                    value={pubYear} 
-                    onChange={(e) => setPubYear(e.target.value)}
-                    className={pubYear === '' ? "" : `${styles.selected}`}
-                >
-                    <option value="">投稿年を選択</option>
-                    {years.map((year, idx) => (
-                        <option value={year}>{year}年</option>
-                    ))}
-                </select>
+                <div className={styles.searchForm__select}>
+                    <select 
+                        value={category} 
+                        onChange={(e) => setCategory(e.target.value)}
+                        className={category === '' ? "" : `${styles.selected}`}
+                    >
+                        <option value="">カテゴリーを選択</option>
+                        {array__allCategory.map((option, idx) => (
+                            <option key={idx} value={option.category}>
+                                {option.category}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className={styles.searchForm__select}>
+                    <select 
+                        value={pubYear} 
+                        onChange={(e) => setPubYear(e.target.value)}
+                        className={pubYear === '' ? "" : `${styles.selected}`}
+                    >
+                        <option value="">投稿年を選択</option>
+                        {years.map((year, idx) => (
+                            <option value={year}>{year}年</option>
+                        ))}
+                    </select>                
+                </div>
             </div>
             <div className={styles.searchForm__button}>
                 <button type="submit" disabled={!keyword && !category && !pubYear}>検索</button>

@@ -4,6 +4,10 @@ body{
   line-height: 1.5;
   font-family: "Noto Sans JP", sans-serif;
 
+  main {
+    min-height: 100%;
+  }
+
   a {
     display: inline-block;
     height: 100%;
