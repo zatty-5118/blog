@@ -13,7 +13,6 @@ export default function SearchForm({years}) {
             if (event.persisted) {
                 setKeyword('');
                 setCategory('');
-                setBrand('');
                 setPubYear('');
             }
         };
