@@ -53,13 +53,16 @@ circle {
 
 .title{
     h1{
-        display: flex;
         margin: rem(16) 0;
     }
 
     .searchWord{
-        display: flex;
-        gap: rem(8);
+        span{
+            &:nth-child(2),
+            &:nth-child(3){
+                margin-left: rem(8);
+            }
+        }
     }
 }
 
