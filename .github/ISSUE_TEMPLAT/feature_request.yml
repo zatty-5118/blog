@@ -1,0 +1,33 @@
+name: 💡 機能追加
+description: 新機能の追加
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        以下の情報を記入してください。
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: 概要
+      description: このissueの概要を記載
+      placeholder: 例）〜の機能を追加する
+    validations:
+      required: true
+  
+  - type: textarea
+    id: page
+    attributes:
+      label: 対象ページ
+      description: 対象ページのURLを記載
+    validations:
+      required: true
+
+  - type: textarea
+    id: file
+    attributes:
+      label: 対象ファイル
+      description: 編集対象のファイルを記載
+    validations:
+      required: true
