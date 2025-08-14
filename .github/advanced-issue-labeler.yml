@@ -1,0 +1,12 @@
+policy:
+  - template: ["task_report.yml"]
+    section:
+      - id: ["category"]
+        block-list: []
+        label:
+          - name: bug
+            keys: ["bug"]
+          - name: design
+            keys: ["design"]
+          - name: feature
+            keys: ["feature"]

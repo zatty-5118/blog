@@ -1,0 +1,38 @@
+name: 💡 タスク管理用issue
+description: タスク管理の際に使用する
+labels: ["task"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        以下の情報を記入してください。
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: 概要
+      description: タスクの概要や目的、実装する意図を記載する
+      placeholder: 例）〜のため機能を追加する
+    validations:
+      required: true
+  
+  - type: dropdown
+    id: category
+    attributes:
+      label: タスクのカテゴリー
+      description: 不具合修正の場合：bug 既存のデザインを変更する場合：design 新規で機能やセクションを追加する場合：feature
+      multiple: true
+      options:
+        - bug
+        - design
+        - feature
+      validations:
+        required: true
+  
+  - type: textarea
+    id: todo
+    attributes:
+      label: TODO
+      description: タスクのTODOを記載する
+    validations:
+      required: true
