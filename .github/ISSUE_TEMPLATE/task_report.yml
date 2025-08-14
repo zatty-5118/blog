@@ -21,12 +21,12 @@ body:
     attributes:
       label: タスクのカテゴリー
       description: 不具合修正の場合：bug 既存のデザインを変更する場合：design 新規で機能やセクションを追加する場合：feature
-      multiple: true
-      required: true
       options:
         - bug
         - design
         - feature
+    validations:
+      required: true
   
   - type: textarea
     id: todo
