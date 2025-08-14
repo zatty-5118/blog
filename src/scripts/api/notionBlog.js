@@ -25,7 +25,10 @@ responseBlog.results.map((value) => {
     obj["published"] = value.properties.Published.checkbox;
     obj["description"] = value.properties.Description.rich_text[0].text.content;
 
-    array__allArticleData.push(obj)
+    if(obj["published"]){
+        array__allArticleData.push(obj);
+    };
+
 });
 
 export {notionBlog, responseBlog, array__allArticleData}
