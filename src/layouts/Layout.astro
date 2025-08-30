@@ -12,9 +12,7 @@ import '../styles/vendor/reset.scss';
 const { url,title,description,hierarchies,lists,articlePage } = Astro.props;
 const GOOGLE_TAG_MANAGER = import.meta.env.GOOGLE_TAG_MANAGER;
 
-const classArticlePage = articlePage ? "articlePage" : "";
-
-console.log(articlePage)
+const classArticlePage = articlePage === true ? "articlePage" : "";
 ---
 
 <!DOCTYPE html>

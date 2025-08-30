@@ -4,7 +4,7 @@ import ArticleCard from '../../../components/modules/Card/ArticleCard';
 import Pagination from '../../../components/modules/Pagination/Pagination.astro';
 import { Image } from 'astro:assets';
 import { BASE_URL } from '../../../scripts/modules/baseURL.js';
-import { array__allArticleData } from '../../../scripts/api/notionBlog.js';
+import { array__allArticleData } from '../../../scripts/api/microcms/microcmsBlog';
 
 export async function getStaticPaths({paginate}) {
 
@@ -15,10 +15,6 @@ export async function getStaticPaths({paginate}) {
 }
 
 const { page } = Astro.props;
-
-const publishedArticle = page.data.filter((value) => {
-  return value.published;
-});
 
 const totalPageNumber = Math.ceil(page.total / page.size);
 let currentPageNumber;
@@ -96,7 +92,7 @@ const boolArticlePage = false;
                 <h1>全ての記事</h1>
             </section>
             <section class="articleList">
-                <ArticleCard articles={publishedArticle} cardType="border" client:load/>
+                <ArticleCard articles={page.data} cardType="border" client:load/>
             </section>
             <Pagination
                 totalPageNumber={totalPageNumber}

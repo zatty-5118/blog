@@ -3,7 +3,7 @@ import Layout from '../../../../layouts/Layout.astro';
 import ArticleCard from '../../../../components/modules/Card/ArticleCard';
 import Pagination from '../../../../components/modules/Pagination/Pagination.astro';
 import { BASE_URL } from '../../../../scripts/modules/baseURL.js';
-import { array__allArticleData } from '../../../../scripts/api/notionBlog.js';
+import { array__allArticleData } from '../../../../scripts/api/microcms/microcmsBlog.js';
 import { array__allCategory } from '../../../../scripts/array__allCategory.js';
 
 export async function getStaticPaths({paginate}) {
@@ -70,10 +70,6 @@ const paginationGenerator = () => {
   return rangeWidthDots  
 }
 
-const publishedArticle = article.filter((value) => {
-  return value.published;
-});
-
 // 構造化データのマークアップ
 const hierarchies = [
   {
@@ -118,7 +114,7 @@ const boolArticlePage = false;
         <div class="title">
           <h1>「{category_ja}」の記事一覧</h1>
         </div>
-        <ArticleCard articles={publishedArticle} cardType="border" client:load/>
+        <ArticleCard articles={article} cardType="border" client:load/>
       </div>
     </section>
     <Pagination
