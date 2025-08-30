@@ -37,13 +37,26 @@ jobs:
           # node-version: 18 # サイト構築に使用するNodeのバージョン。デフォルトは18です。（オプション）
           # package-manager: pnpm@latest # 依存関係のインストールとサイトのビルドに使用する Node パッケージマネージャ。ロックファイルに基づいて自動的に検出されます。(オプション)
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+deploy:
+  needs: build
+  runs-on: ubuntu-latest
+  if: github.ref == 'refs/heads/main'
+  environment:
+    name: production-pages
+    url: ${{ steps.deployment.outputs.page_url }}
+  steps:
+    - name: Deploy to GitHub Pages (Production)
+      id: deployment
+      uses: actions/deploy-pages@v4
+
+deploy-dev:
+  needs: build
+  runs-on: ubuntu-latest
+  if: startsWith(github.ref, 'refs/heads/feature/') || github.ref == 'refs/heads/develop'
+  environment:
+    name: dev-pages
+    url: ${{ steps.deployment.outputs.page_url }}
+  steps:
+    - name: Deploy to GitHub Pages (Staging)
+      id: deployment
+      uses: actions/deploy-pages@v4
