@@ -25,8 +25,8 @@ jobs:
       NOTION_SECRET: ${{ secrets.NOTION_SECRET }}
       NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
       GOOGLE_TAG_MANAGER: ${{ secrets.GOOGLE_TAG_MANAGER }} 
-      MICROCMS_SERVICE_DOMAIN: ${{MICROCMS_SERVICE_DOMAIN}} 
-      MICROCMS_API_KEY: ${{MICROCMS_API_KEY}}
+      MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }} 
+      MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
