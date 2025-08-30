@@ -8,7 +8,7 @@ on:
     branches:
       - main
       - develop
-      - 'develop/**'
+      - 'feature/**'
   # このワークフローを GitHub の Actions タブから手動で実行できるようにします。
   workflow_dispatch:
 
