@@ -11,6 +11,8 @@ on:
       - 'feature/**'
   # このワークフローを GitHub の Actions タブから手動で実行できるようにします。
   workflow_dispatch:
+  repository_dispatch:
+    types: [microcms_update]
 
 # このジョブがリポジトリをクローンし、ページデプロイメントを作成することを許可します。
 permissions:
@@ -20,6 +22,7 @@ permissions:
 
 jobs:
   build:
+    if: github.event_name == 'push' || github.event_name == 'repository_dispatch' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     env:
       NOTION_SECRET: ${{ secrets.NOTION_SECRET }}
