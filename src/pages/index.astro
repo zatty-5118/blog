@@ -3,17 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import ArticleCard from '../components/modules/Card/ArticleCard';
 import SearchForm from '../components/modules/Search/SearchForm.jsx';
 import { BASE_URL } from '../scripts/modules/baseURL.js';
-import { array__allArticleData } from '../scripts/api/notionBlog.js';
+import { array__allArticleData } from "../scripts/api/microcms/microcmsBlog.js"
 import { array__allCategory } from '../scripts/array__allCategory.js';
-import { array__allNewsData } from '../scripts/api/notionNews.js';
+import { array__allNewsData } from '../scripts/api/notion/notionNews.js';
 import { Picture } from 'astro-imagetools/components';
 import '../styles/topPage.scss';
-
-const filterArticleData = array__allArticleData.filter((value) => {
-  return value.published;
-});
-
-const publishedArticle = filterArticleData.slice(0, 6);
 
 const pubYears = Array.from(
 new Set(
@@ -58,7 +52,7 @@ const boolArticlePage = false;
 		<section class="newArticle">
 			<div class="inner">
 				<h2>新着記事</h2>
-				<ArticleCard articles={publishedArticle} cardType="shadow" client:load/>
+				<ArticleCard articles={array__allArticleData.slice(0, 6)} cardType="shadow" client:load/>
 				<div class="link">
 					<a href=`${BASE_URL}/article/list/page=1`>もっと見る</a>
 				</div>

@@ -7,9 +7,9 @@ export default function ArticleCard({ articles,cardType }) {
         <ul className={`${styles.article__list} ${styles[classCardType]}`}>
             {articles.map((article) => 
                 <li className={styles.article__card}>
-                    <a href={`${BASE_URL}/article/view/${article.slug}`}>
+                    <a href={`${BASE_URL}/article/view/${article.id}`}>
                         <div className={styles.image}>
-                            <img src={article.thumbnail} alt={article.title} loading='lazy' decoding='async' />
+                            <img src={article.thumbnail.url} alt={article.title} loading='lazy' decoding='async' />
                         </div>
                         <div className={styles.text}>
                             <div className={styles.title}>
