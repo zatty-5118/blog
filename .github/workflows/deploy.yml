@@ -5,7 +5,10 @@ on:
   # 異なるブランチ名を使用する場合は、`main` をブランチ名に置き換えてください
 
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - develop
+      - 'develop/**'
   # このワークフローを GitHub の Actions タブから手動で実行できるようにします。
   workflow_dispatch:
 
