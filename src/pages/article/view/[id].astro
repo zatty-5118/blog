@@ -1,0 +1,97 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { BASE_URL } from '../../../scripts/modules/baseURL';
+import { array__allArticleData } from '../../../scripts/api/microcms/microcmsBlog.js';
+import { array__allCategory } from '../../../scripts/array__allCategory.js';
+import { transformHtml } from "../../../scripts/utils/transformHtml.js"
+// import { NotionToMarkdown } from "notion-to-md";
+// import { unified } from 'unified';
+// import rehypeStringify from 'rehype-stringify';
+// import remarkParse from 'remark-parse';
+// import remarkRehype from 'remark-rehype';
+// import remarkUnwrapImages from 'remark-unwrap-images';
+// import rehypeFigure from "@microflash/rehype-figure";
+// import rehypeRaw from "rehype-raw";
+// import remarkGfm from "remark-gfm";
+import '../../../styles/articlePage.scss';
+
+export async function getStaticPaths() {
+    array__allArticleData.filter((article) => {
+        return array__allCategory.filter((value) => {
+            if(article.category.includes(value.category)){
+                return article["categorySlug"] = value.categorySlug;
+            }
+        });
+    });
+
+    return array__allArticleData.map((elem) => ({
+        params: {id: elem.id},
+        props: {
+            title: elem.title,
+            thumbnail: elem.thumbnail.url,
+            date: elem.date,
+            category_ja: elem.category,
+            category_slug: elem.categorySlug,
+            description: elem.description,
+            content: elem.content
+        }
+    }))
+}
+
+
+const { id } = Astro.params;
+const { title,thumbnail,date,category_ja,category_slug,content,description } = Astro.props;
+
+const transformedContent = transformHtml(content);
+
+const hierarchies = [
+    {
+        position : 2,
+        itemName: `${title}`,
+        itemPath: `${BASE_URL}/article/view/${id}`
+    },
+
+];
+
+const lists = [
+    { 
+        name: `${title}`,
+        path: `${BASE_URL}/article/view/${id}`
+    },
+];
+const boolArticlePage = true;
+---
+
+<Layout 
+    title=`${title} | zatty's Blog`
+    description={description}
+    url=`${BASE_URL}/article/view/${id}`
+    hierarchies={hierarchies}
+    lists={lists}
+    articlePage={boolArticlePage}
+>
+    <main>
+        <article>
+            <section id="mainView">
+                <section class="top">
+                    <div class="image">
+                        <Image src={thumbnail} alt={title} width={360} height={240}>
+                    </div>
+                    <div class="title">
+                        <h1>{title}</h1>
+                    </div>    
+                </section>
+                <section class="info">
+                    <div id={category_slug} class="category">
+                        <a href=`${BASE_URL}/article/category/${category_slug}/page=1`>{category_ja}</a>
+                    </div>
+                    <div class="date">
+                        <time datetime={date} itemprop="datePublished">{`${new Date(date).getFullYear()}.${('0'+(new Date(date).getMonth()+1)).slice(-2)}.${('0'+(new Date(date).getDate())).slice(-2)}`}</time>
+                    </div>
+                </section>
+            </section>
+            <section id="mainContent" set:html={transformedContent}></section>
+        </article>
+    </main>
+</Layout>
