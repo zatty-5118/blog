@@ -11,7 +11,7 @@ on:
       - 'feature/**'
   # このワークフローを GitHub の Actions タブから手動で実行できるようにします。
   workflow_dispatch:
-   repository_dispatch:
+  repository_dispatch:
     types: [microcms_update]
 
 # このジョブがリポジトリをクローンし、ページデプロイメントを作成することを許可します。
