@@ -19,7 +19,6 @@ responseNews.results.map((news) => {
 	obj.date = news.properties.Date.date.start;
 	array__allNewsData.push(obj);
 });
-
-
+array__allNewsData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 export { array__allNewsData }
