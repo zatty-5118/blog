@@ -103,15 +103,12 @@ article{
         }
 
         h3{
-            padding-top: rem(8);
+            padding-left: rem(16);
+            border-left: 5px solid transparent;
+            background: 
+                linear-gradient(to bottom, cl(cl-primary-dark) 50%, cl(cl-primary) 50%) left / 5px 100% no-repeat;
             &::first-letter {
-                padding: rem(2) 0 rem(2) rem(2);
-                @include responsive(md){
-                    padding: rem(8) 0 rem(8) rem(8);
-                }
                 color: cl(cl-primary-dark);
-                border-left: 3px solid;
-                border-bottom: 3px solid;
             }
         }
 
