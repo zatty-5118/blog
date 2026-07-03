@@ -75,12 +75,6 @@ article{
             max-width: 680px;
         }
 
-        h2,
-        h3,
-        h4{
-            margin: rem(32) 0;
-        }
-
         h2{
 
             position: relative;
@@ -90,6 +84,7 @@ article{
             background: cl(cl-primary);
             color: cl(cl-title);
             font-weight: bold;
+            margin: rem(32) 0;
             &::before{
                 position: absolute;
                 top: calc(100% + 2px);
@@ -105,11 +100,16 @@ article{
         h3{
             padding-left: rem(16);
             border-left: 5px solid transparent;
+            margin: rem(32) 0 0;
             background: 
                 linear-gradient(to bottom, cl(cl-primary-dark) 50%, cl(cl-primary) 50%) left / 5px 100% no-repeat;
             &::first-letter {
                 color: cl(cl-primary-dark);
             }
+        }
+
+        h4 {
+            margin: rem(32) 0 rem(16);
         }
 
         p{
